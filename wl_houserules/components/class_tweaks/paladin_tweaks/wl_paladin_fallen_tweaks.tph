@@ -1,0 +1,6 @@
+WITH_TRA ~wl_houserules/lang/%LANGUAGE%/wl_paladin_tweaks.tra~ BEGIN
+
+COMPILE "wl_houserules/components/class_tweaks/paladin_tweaks/fallen/d/wl_fallen.d"
+EXTEND_BOTTOM ~player1d.bcs~ ~wl_houserules/components/class_tweaks/paladin_tweaks/fallen/baf/wl_fallen.baf~
+
+END

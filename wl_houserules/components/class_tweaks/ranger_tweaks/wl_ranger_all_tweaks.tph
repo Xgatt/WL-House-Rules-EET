@@ -1,0 +1,8 @@
+WITH_TRA ~wl_houserules/lang/%LANGUAGE%/wl_ranger_tweaks.tra~ BEGIN
+
+INCLUDE "wl_houserules/components/class_tweaks/ranger_tweaks/wl_ranger_evilfall.tph"
+
+INCLUDE "wl_houserules/components/class_tweaks/ranger_tweaks/wl_ranger_beastmaster_tweaks.tph"
+
+
+END

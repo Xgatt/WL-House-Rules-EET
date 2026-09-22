@@ -1,0 +1,10 @@
+//WITH_TRA ~wl_houserules/lang/%LANGUAGE%/wl_item_tweaks.tra~ BEGIN
+
+
+INCLUDE "wl_houserules/components/spell_tweaks/wl_improved_free_action.tph"
+
+INCLUDE "wl_houserules/components/spell_tweaks/wl_replace_identify.tph"
+
+INCLUDE "wl_houserules/components/spell_tweaks/wl_revised_familiars.tph"
+
+//END

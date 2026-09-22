@@ -1,0 +1,116 @@
+@1 = ~Recharge Wand~
+
+@2 = ~Recharging this item will cost 5000gp.~
+
+@3 = ~~
+
+@4 = ~~
+
+@5 = ~Maybe later.~
+
+@6 = ~Type: Two-handed~
+
+@7 = ~Type: One-handed~
+
+@8 = ~Missile~
+
+@9 = ~Piercing~
+
+@10 = ~Crushing~
+
+@11 = ~Slashing~
+
+@12 = ~Charged Staff~
+
+@13 = ~This staff has been imbued with the wielder's own power, allowing them to channel through it to hit enemies at range with a kinetic blast, inflicting crushing damage.
+
+STATISTICS:
+
+Damage: 1d6 (crushing)
+Range: 30ft
+Speed Factor: 4
+Proficiency Type: Quarterstaff
+Type: Two-handed
+Requires:
+ 5 Strength
+
+Weight: 4~
+
+@14 = ~This staff has been imbued with the wielder's own power, allowing them to channel through it to hit enemies at range with a kinetic blast, inflicting crushing damage.
+
+STATISTICS:
+
+Damage: 1d8 (crushing)
+Range: 30ft
+Speed Factor: 4
+Proficiency Type: Quarterstaff
+Type: Two-handed
+Requires:
+ 5 Strength
+
+Weight: 4~
+
+@15 = ~This staff has been imbued with the wielder's own power, allowing them to channel through it to hit enemies at range with a kinetic blast, inflicting crushing damage.
+
+STATISTICS:
+
+Damage: 1d10 (crushing)
+Range: 30ft
+Speed Factor: 4
+Proficiency Type: Quarterstaff
+Type: Two-handed
+Requires:
+ 5 Strength
+
+Weight: 4~
+
+@16 = ~This staff has been imbued with the wielder's own power, allowing them to channel through it to hit enemies at range with a kinetic blast, inflicting crushing damage.
+
+STATISTICS:
+
+Damage: 1d12 (crushing)
+Range: 30ft
+Speed Factor: 4
+Proficiency Type: Quarterstaff
+Type: Two-handed
+Requires:
+ 5 Strength
+
+Weight: 4~
+
+@17 = ~Charge Staff~
+
+@18 = ~Dissipate Energy~
+
+@19 = ~This girdle greatly increases the wearer's Constitution. King Violos used it when leading an expedition against marsh trolls. He'd been severely sickened the past winter and was no longer the healthy man he once was. The belt gave extra years to his life and inspired his men to renew their confidence in their king once more.
+
+STATISTICS:
+
+– Sets Constitution to 18
+
+Weight: 2~
+
+@20 = ~STATISTICS:
+
+~
+
+@21 = ~STATISTICS:
+
+Combat abilities:
+– 1 extra attack per round
+
+~
+
+@22 = ~Damage:~
+
+@23 = ~THAC0:~
+
+@24 = ~THAC0: +4
+Damage:~
+
+@25 = ~STATISTICS:
+
+Combat abilities:
+– Enemies are knocked back and knocked down for 3 seconds on failed save vs death.
+
+~

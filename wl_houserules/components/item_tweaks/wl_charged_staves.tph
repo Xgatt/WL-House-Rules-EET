@@ -1,0 +1,108 @@
+WITH_TRA ~wl_houserules/lang/%LANGUAGE%/wl_item_tweaks.tra~ BEGIN
+
+INCLUDE ~wl_houserules/lib/create_effect-spell-headers.tpa~
+
+COPY ~wl_houserules/components/item_tweaks/charged_staves/itm/wlhrqs01.itm~ ~override~
+	SAY NAME1 @12
+	SAY NAME2 @12
+	SAY 0x50 @13
+COPY ~wl_houserules/components/item_tweaks/charged_staves/itm/wlhrqs02.itm~ ~override~
+	SAY NAME1 @12
+	SAY NAME2 @12
+	SAY 0x50 @14
+COPY ~wl_houserules/components/item_tweaks/charged_staves/itm/wlhrqs03.itm~ ~override~
+	SAY NAME1 @12
+	SAY NAME2 @12
+	SAY 0x50 @15
+COPY ~wl_houserules/components/item_tweaks/charged_staves/itm/wlhrqs04.itm~ ~override~
+	SAY NAME1 @12
+	SAY NAME2 @12
+	SAY 0x50 @16
+COPY ~wl_houserules/components/item_tweaks/charged_staves/spl/wlhrqs1a.spl~ ~override~
+	SAY NAME1 @17
+	SAY NAME2 @17
+COPY ~wl_houserules/components/item_tweaks/charged_staves/spl/wlhrqs1b.spl~ ~override~
+	SAY NAME1 @18
+	SAY NAME2 @18
+
+COPY_EXISTING_REGEXP GLOB ~^.+\.itm~ ~override~
+	PATCH_IF (%SOURCE_SIZE% > 0x70) BEGIN
+		READ_SHORT 0x1c type
+			PATCH_IF
+				(type = 26) BEGIN
+					LPF ADD_ITEM_HEADER
+						INT_VAR
+							type=2
+							location=3
+							target=5
+							insert_point = 1
+						STR_VAR
+							icon=~istaf01~
+					END
+					LPF ADD_ITEM_EFFECT
+						INT_VAR
+							type=2
+							header=2
+							opcode=326
+							target=1
+							timing=9
+							power=100
+							parameter1=1
+							parameter2=0
+						STR_VAR
+							resource=~wlhrqs1b~
+					END
+					LPF ADD_ITEM_HEADER
+						INT_VAR
+							type=2
+							location=3
+							target=5
+							insert_point = 1
+						STR_VAR
+							icon=~istaf22~
+					END
+					LPF ADD_ITEM_EFFECT
+						INT_VAR
+							type=2
+							header=2
+							opcode=326
+							target=1
+							timing=9
+							power=100
+							parameter1=1
+							parameter2=105
+						STR_VAR
+							resource=~wlhrqs1a~
+					END
+					LPF ADD_ITEM_EFFECT
+						INT_VAR
+							type=2
+							header=2
+							opcode=326
+							target=1
+							timing=9
+							power=100
+							parameter1=19
+							parameter2=105
+						STR_VAR
+							resource=~wlhrqs1a~
+					END
+					LPF ADD_ITEM_EFFECT
+						INT_VAR
+							type=2
+							header=2
+							opcode=326
+							target=1
+							timing=9
+							power=100
+							parameter1=5
+							parameter2=105
+						STR_VAR
+							resource=~wlhrqs1a~
+					END
+							
+				END
+	END
+BUT_ONLY
+
+END

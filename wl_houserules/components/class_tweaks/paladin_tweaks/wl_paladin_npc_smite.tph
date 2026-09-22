@@ -1,0 +1,50 @@
+COPY_EXISTING_REGEXP GLOB ~^.+\.cre~ ~override~
+
+READ_ASCII 0x280 sname
+READ_LONG 0x244 kit
+READ_BYTE 0x273 class
+PATCH_IF
+	(NOT FILE_CONTAINS_EVALUATED(~pdialog.2da~ ~%sname%~)) AND
+	(NOT FILE_CONTAINS_EVALUATED(~bddialog.2da~ ~%sname%~)) AND
+	(class = 6) AND
+	(kit != 1075838976) BEGIN
+		DEFINE_ASSOCIATIVE_ARRAY paladins BEGIN
+			~%SOURCE_RES%.cre~ => 0
+		END
+	END
+
+PATCH_IF
+	(NOT FILE_CONTAINS_EVALUATED(~pdialog.2da~ ~%sname%~)) AND
+	(NOT FILE_CONTAINS_EVALUATED(~bddialog.2da~ ~%sname%~)) AND
+	(class = 6) AND
+	(kit = 1075838976) BEGIN
+		DEFINE_ASSOCIATIVE_ARRAY blackguards BEGIN
+			~%SOURCE_RES%.cre~ => 0
+		END
+	END
+
+BUT_ONLY
+
+ACTION_PHP_EACH paladins AS paladin => 0 BEGIN
+COPY_EXISTING ~%paladin%~ ~override~
+	LPF ADD_CRE_EFFECT
+		INT_VAR 
+			opcode = 248
+			timing = 9 
+			target = 1
+		STR_VAR
+			resource = ~wlhrpt03~
+	END
+END
+
+ACTION_PHP_EACH blackguards AS blackguard => 0 BEGIN
+COPY_EXISTING ~%blackguard%~ ~override~
+	LPF ADD_CRE_EFFECT
+		INT_VAR 
+			opcode = 248
+			timing = 9 
+			target = 1
+		STR_VAR
+			resource = ~wlhrpt12~
+	END
+END

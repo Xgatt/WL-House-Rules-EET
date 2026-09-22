@@ -1,0 +1,48 @@
+WITH_TRA ~wl_houserules/lang/%LANGUAGE%/wl_monk_tweaks.tra~ BEGIN
+
+// Give Dark Moon kit ability to backstab
+
+APPEND ~backstab.2da~ ~DARK_MOON	1	2	2	2	2	2	2	2	2	3	3	3	3	3	3	3	3	4	4	4	4	4	4	4	4	4	4	4	4	4	4	4	4	4	4	4	4	4	4	4	4~
+
+//update the kit description with the changes
+COPY_EXISTING ~kitlist.2da~ ~override~ 
+	COUNT_2DA_ROWS 10 rows
+		FOR (row = 3 ; row < rows ; row = row + 1 ) BEGIN
+			READ_2DA_ENTRY row 1 10 name3
+			READ_2DA_ENTRY row 4 10 string3
+			PATCH_IF (~%name3%~ STRING_EQUAL_CASE ~DARK_MOON~) BEGIN
+				SPRINT findDM2 @6
+				SPRINT replaceDM2 @7
+				SPRINT findDM3 @8
+				SPRINT patch_string ~%string3%~
+				GET_STRREF ~%string3%~ desc
+				INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+					REPLACE_TEXTUALLY ~%findDM2%~ ~%replaceDM2%~ 
+					REPLACE_TEXTUALLY ~%findDM3%~ ~~ 
+				END
+			END
+		END
+		REPLACE ~%patch_string%~ ~%new_desc%~
+BUT_ONLY
+
+COPY_EXISTING ~clastext.2da~ ~override~ //update kit description in clastext
+	COUNT_2DA_ROWS 9 rows
+	FOR (row = 0 ; row < rows ; row += 1) BEGIN
+		READ_2DA_ENTRY row 0 9 name3
+		READ_2DA_ENTRY row 4 9 string3
+		PATCH_IF (~%name3%~ STRING_EQUAL_CASE ~DARK_MOON~) BEGIN
+			SPRINT findDM2 @6
+			SPRINT replaceDM2 @7
+			SPRINT findDM3 @8
+			SPRINT patch_string ~%string3%~
+			GET_STRREF ~%string3%~ desc
+			INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+				REPLACE_TEXTUALLY ~%findDM2%~ ~%replaceDM2%~ 
+				REPLACE_TEXTUALLY ~%findDM3%~ ~~ 
+			END
+		END
+	END
+	REPLACE ~%patch_string%~ ~%new_desc%~
+BUT_ONLY
+
+END

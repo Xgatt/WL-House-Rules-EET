@@ -1,0 +1,30 @@
+@1 = ~Smite Evil~
+
+@2 = ~SMITE EVIL:
+The Paladin's weapon glows white with holy light. For 1 round it deals an additional 1d4 magic damage against evil targets. Duration increases by 1 round and die size increases by 2 for every 2 points of Charisma above 16 – 2 rounds and 1d6 bonus damage at CHA 18 etc.~
+
+@3 = ~Smite Good~
+
+@4 = ~SMITE GOOD:
+The Paladin's weapon glows red with holy light. For 1 round it deals an additional 1d4 magic damage against good targets. Duration increases by 1 round and die size increases by 2 for every 2 points of Charisma above 16 – 2 rounds and 1d6 bonus damage at CHA 18 etc.~
+
+@5 = ~– May cast Protection From Evil once per day per level (starts at 1st level with one use).
+~
+
+@6 = ~– May cast Protection From Evil once per day per level (starts at 1st level with one use).
+– May cast Smite Evil (Smite Good for Blackguards) once per day per 10 levels starting at level 1 with 1 use).
+
+SMITE EVIL:
+The Paladin's weapon glows white with holy light. For 1 round it deals an additional 1d4 magic damage against evil targets. Duration increases by 1 round and die size increases by 2 for every 2 points of Charisma above 16 – 2 rounds and 1d6 bonus damage at CHA 18 etc.
+
+~
+
+@1001 = ~A messenger of your former patron visits you in your dream. They've been following your recent exploits and believe you've done enough to redeem yourself and return to the fold. Are you ready to rise again as a Paladin?~
+
+@1002 = ~A malevolent entity visits you in your dream. It promises greater powers than your former patron stole from you if you were to renounce them and bind yourself to it instead. Are you ready to abandon your oaths forever and rise anew as a Blackguard?~
+
+@1003 = ~Yes, I wish to resume my service!~
+
+@1004 = ~Yes, give me power!~
+
+@1005 = ~No, I need time to think.~

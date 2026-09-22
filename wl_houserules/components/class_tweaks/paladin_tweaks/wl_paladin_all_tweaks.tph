@@ -1,0 +1,9 @@
+WITH_TRA ~wl_houserules/lang/%LANGUAGE%/wl_paladin_tweaks.tra~ BEGIN
+ 
+INCLUDE "wl_houserules/components/class_tweaks/paladin_tweaks/wl_paladin_smite.tph"
+
+INCLUDE "wl_houserules/components/class_tweaks/paladin_tweaks/wl_paladin_npc_smite.tph"
+
+INCLUDE "wl_houserules/components/class_tweaks/paladin_tweaks/wl_paladin_fallen_tweaks.tph"
+
+END

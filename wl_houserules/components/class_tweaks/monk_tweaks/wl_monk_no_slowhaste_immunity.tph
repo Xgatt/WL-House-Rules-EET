@@ -1,0 +1,49 @@
+WITH_TRA ~wl_houserules/lang/%LANGUAGE%/wl_monk_tweaks.tra~ BEGIN
+
+// get rid of immunity to slow/haste for all monks
+
+COPY_EXISTING ~kitlist.2da~ ~override~
+	COUNT_2DA_ROWS 10 rows1
+	FOR (row1 = 1; row1 < rows1; ++row1) BEGIN
+		READ_2DA_ENTRY row1 1 10 name1
+		READ_2DA_ENTRY row1 4 10 string1
+		READ_2DA_ENTRY row1 5 10 clab
+		READ_2DA_ENTRY row1 8 10 class
+		PATCH_IF (class = 20) BEGIN
+			INNER_ACTION BEGIN // get rid of haste/slow immunity at lvl 5 for all monks
+				COPY_EXISTING ~clabmo01.2da~ ~override~ // update trueclass clab
+					REPLACE_TEXTUALLY ~AP_SPCL814~ ~AP_WLMTAL01~
+				COPY_EXISTING ~%clab%.2da~ ~override~ // update all kit clabs
+					REPLACE_TEXTUALLY ~AP_SPCL814~ ~AP_WLMTAL01~
+				COPY_EXISTING ~spcl814.spl~ ~override~ // get the string numbers of the disease strings to disable from the original spell
+					READ_LONG 0x15e IA3_string1
+					READ_LONG 0x18e IA3_string2
+				BUT_ONLY
+				COPY ~wl_HouseRules\components\class_tweaks\monk_tweaks\monk\spl\wlmtal01.spl~ ~override~ // add the replacement spell and write in the strings for disease
+					WRITE_LONG 0x9e %IA3_string1%
+					WRITE_LONG 0xce %IA3_string2%
+				COPY_EXISTING ~clastext.2da~ ~override~ // edit the class description to reflect the changes
+					COUNT_2DA_ROWS 9 IA3_rows
+					FOR (IA3_row = 0 ; IA3_row < IA3_rows ; IA3_row += 1) BEGIN
+						READ_2DA_ENTRY IA3_row 0 9 IA3_name
+						READ_2DA_ENTRY IA3_row 4 9 IA3_string3
+						PATCH_IF (~%IA3_name%~ STRING_EQUAL_CASE ~MONK~) BEGIN
+							SPRINT IA3_find @5
+							SPRINT patch_string1 ~%IA3_string3%~
+							GET_STRREF ~%IA3_string3%~ desc1
+							INNER_PATCH_SAVE new_desc1 ~%desc1%~ BEGIN
+								REPLACE_TEXTUALLY ~%IA3_find%~ ~~
+							END
+						END
+					END
+				BUT_ONLY
+				COPY_EXISTING ~potn14.itm~ ~override~ //make oil of speed usable by monks
+					READ_LONG 0x1e unuse
+					WRITE_LONG 0x1e (unuse BAND 0b11011111111111111111111111111111)
+			END
+		END
+	END
+	REPLACE ~%patch_string1%~ ~%new_desc1%~
+BUT_ONLY
+
+END

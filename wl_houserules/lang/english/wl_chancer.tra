@@ -1,0 +1,146 @@
+@1 = ~Chancer~
+
+@2 = ~CHANCER: Thrillseekers and compulsive gamblers, Chancers embrace a high risk, high reward philosophy and are happy to take any odds. This usually makes for an exciting but brief adventuring career, however the rare chancers who live long enough to become experienced can earn Tymora's favor and stack the odds in their favor.
+
+Advantages:
+
+– All or Nothing fighting style: The Chancer's unarmed or weapon attacks have a 50% chance to critically hit.
+– May cast Nahal's Reckless Dweomer at will.
+– Song of Chaos: The Chancer's song is different, infused with wild magic and filled with difficult to hit notes. As a result it can have a variety of differet effects which can either help or hinder the Chancer and their allies.
+– Starting at level 3 may cast The Final Gambit once per day as an innate ability not affected by wild surge.
+– Tymora's Favored: Starting at level 10, the odds begin to shift in the Chancer's favor. Their spellcasting is permanenently protected by a Chaos Shield and the odds on All or Nothing and Song of Chaos are skewed toward positive outcomes.
+– Tymora's Chosen: Starting at level 20 the odds are heavily stacked in the Chancer's favor. Their spellcasting is permanently protected by an Improved Chaos Shield and the odds on All or Nothing and Song of Chaos are skewed toward positive outcomes.
+
+THE FINAL GAMBIT: When all seems lost the Chancer has one last card to play. With The Final Gambit the Chancer attempts to bind <PRO_HISHER> fate and that of one enemy to one last roll of the dice killing one, both or neither.
+
+Disadvantages:
+– All or Nothing fighting style: The Chancer's attacks have a 50% chance to critically miss and critical misses will cause the Chancer to be briefly stunned or even hurt them.
+– Wild Magic: Chancer's spellcasting is infused with wild magic and is very prone to wild surges at all times.
+– Song of Chaos: The Chancer's song is different, infused with wild magic and filled with difficult to hit notes. As a result it can have a variety of different effects which can either help or hinder the Chancer and their allies.
+– The odds for The Final Gambit do not improve with experience~
+
+@3 = ~Combat abilities increased~
+
+@4 = ~Combat abilities decreased~
+
+@5 = ~Stunned~
+
+@6 = ~Alu–Fiend~
+
+@7 = ~Balor~
+
+@8 = ~Greater Basilisk~
+
+@9 = ~Battle Horror~
+
+@10 = ~Spirit Bear~
+
+@11 = ~Beholder~
+
+@12 = ~Biff The Understudy~
+
+@13 = ~Deer~
+
+@14 = ~Djinni~
+
+@15 = ~Marilith~
+
+@16 = ~Glabrezu~
+
+@17 = ~Cambion~
+
+@18 = ~Greater Doppelganger~
+
+@19 = ~Efreeti~
+
+@20 = ~Elder Earth Elemental~
+
+@21 = ~Elder Fire Elemental~
+
+@22 = ~Groundhog~
+
+@23 = ~Gibberling~
+
+@24 = ~Goblin~
+
+@25 = ~Hakeashar~
+
+@26 = ~Helmed Horror~
+
+@27 = ~Snow Troll~
+
+@28 = ~Loup Garou~
+
+@29 = ~Mind Flayer~
+
+@30 = ~Moose~
+
+@31 = ~Earth Mephit~
+
+@32 = ~Magma Mephit~
+
+@33 = ~Nishruu~
+
+@34 = ~Nymph~
+
+@35 = ~Ogre Mage~
+
+@36 = ~Otyugh~
+
+@37 = ~Fallen Planetar~
+
+@38 = ~Planetar~
+
+@39 = ~Rabbit~
+
+@40 = ~Devil Shade~
+
+@41 = ~Skeleton Warrior~
+
+@42 = ~Shambling Mound~
+
+@43 = ~Vortex Spider~
+
+@44 = ~Astral Phase Spider~
+
+@45 = ~Squirrel~
+
+@46 = ~Invisible Stalker~
+
+@47 = ~Succubus~
+
+@48 = ~Umber Hulk~
+
+@49 = ~Vampiric Wolf~
+
+@50 = ~Greater Wyvern~
+
+@51 = ~Greater Werewolf~
+
+@52 = ~The Final Gambit~
+
+@53 = ~Once More Unto The Breach Dear... Friends?~
+
+@54 = ~When all seems lost the Chancer has one last card to play. With The Final Gambit the Chancer attempts to bind <PRO_HISHER> fate and that of one enemy to one roll of the dice killing one, both or neither.~
+
+@55 = ~This spell tears a hole in reality and scours the planes in search of powerful entities to bring back and bind to the Chancer's will. The binding is prone to failure however, often leaving the Chancer to deal with some very powerful, very upset entities. The spell lasts for 2 hours at which point any entities still standing will return where they came from.~
+
+@56 = ~Berserk~
+
+@57 = ~Nahal's Reckless Dweomer
+(Invocation/Evocation)
+
+Level: 1
+Range: Special
+Duration: Special
+Casting Time: Special
+Area of Effect: Special
+Saving Throw: Special
+
+This spell is the Wild Mage's ultimate last–resort spell. When cast, the Mage releases a sudden flood of wild magical energy in the hope of seizing and shaping that energy into a desired spell effect. The attempt usually fails, but something almost always occurs in the process.
+
+To use Nahal's Reckless Dweomer simply cast it, then choose from your list of known spells. A burst of magical energy is released, which the Wild Mage will try to manipulate into the desired form. The actual effect of the spell is determined randomly by a dice roll on the Wild Surge Table (see the manual for more details).
+
+Because the release of energy is planned by the Mage, <PRO_HISHER> level is added to the dice roll. If the result indicates success, the Mage has shaped the magical energy into the desired effect. More often than not, the effect is completely unexpected. The result might be beneficial to the Mage, or it might be completely disastrous: This is the risk the Mage takes in casting Nahal's Reckless Dweomer.~
+
+@58 = ~Nahal's Reckless Dweomer~

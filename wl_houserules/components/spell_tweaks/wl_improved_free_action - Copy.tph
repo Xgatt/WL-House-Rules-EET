@@ -1,0 +1,178 @@
+COPY_EXISTING_REGEXP GLOB ~^.+\.itm~ ~override~
+	PATCH_IF (%SOURCE_SIZE% > 0x70) BEGIN
+	READ_LONG 0x18 flags
+		PATCH_IF ((flags BAND BIT2) = BIT2) BEGIN
+			READ_LONG 0x6a effoff
+			READ_SHORT 0x70 effnum
+			FOR (eff = 0; eff < effnum; eff +=1) BEGIN
+				PATCH_IF (SHORT_AT (effoff + (0x30 * eff) + 0x00) == 101) AND (LONG_AT (effoff + (0x30 * eff) + 0x08) == 16) BEGIN
+					DEFINE_ASSOCIATIVE_ARRAY edit BEGIN
+						~%SOURCE_RES%.itm~ => 0
+					END
+				END
+			END
+		END
+	END
+BUT_ONLY
+	
+ACTION_PHP_EACH edit AS item => v BEGIN
+	COPY_EXISTING ~%item%~ ~override~
+		LPF DELETE_EFFECT
+			INT_VAR
+				check_headers = 0
+				match_opcode = 206
+			STR_VAR
+				match_resource = ~SPWI305~
+		END
+		LPF DELETE_EFFECT
+			INT_VAR
+				check_headers = 0
+				match_opcode = 206
+			STR_VAR
+				match_resource = ~SPRA301~
+		END
+		LPF DELETE_EFFECT
+			INT_VAR
+				check_headers = 0
+				match_opcode = 206
+			STR_VAR
+				match_resource = ~SPIN828~
+		END
+		LPF DELETE_EFFECT
+			INT_VAR
+				check_headers = 0
+				match_opcode = 206
+			STR_VAR
+				match_resource = ~spin572~
+		END
+		LPF DELETE_EFFECT
+			INT_VAR
+				check_headers = 0
+				match_opcode = 206
+			STR_VAR
+				match_resource = ~spwi613~
+		END
+		LPF DELETE_EFFECT
+			INT_VAR
+				check_headers = 0
+				match_opcode = 206
+			STR_VAR
+				match_resource = ~spcl522~
+		END
+		LPF DELETE_EFFECT
+			INT_VAR
+				check_headers = 0
+				match_opcode = 101
+			STR_VAR
+				match_parameter2 = 126
+		END
+		LPF DELETE_EFFECT
+			INT_VAR
+				check_headers = 0
+				match_opcode = 101
+			STR_VAR
+				match_parameter2 = 16
+		END
+		LPF DELETE_EFFECT
+			INT_VAR
+				check_headers = 0
+				match_opcode = 240
+			STR_VAR
+				match_parameter2 = 38
+		END
+		LPF DELETE_EFFECT
+			INT_VAR
+				check_headers = 0
+				match_opcode = 240
+			STR_VAR
+				match_parameter2 = 195
+		END
+		LPF DELETE_EFFECT
+			INT_VAR
+				check_headers = 0
+				match_opcode = 169
+			STR_VAR
+				match_parameter2 = 38
+		END
+		LPF DELETE_EFFECT
+			INT_VAR
+				check_headers = 0
+				match_opcode = 169
+			STR_VAR
+				match_parameter2 = 195
+		END
+END
+
+COPY_EXISTING ~SPPR403.spl~ ~override~
+		LPF DELETE_EFFECT
+			INT_VAR
+				match_opcode = 206
+			STR_VAR
+				match_resource = ~SPWI305~
+		END
+		LPF DELETE_EFFECT
+			INT_VAR
+				match_opcode = 206
+			STR_VAR
+				match_resource = ~SPRA301~
+		END
+		LPF DELETE_EFFECT
+			INT_VAR
+				match_opcode = 206
+			STR_VAR
+				match_resource = ~SPIN828~
+		END
+		LPF DELETE_EFFECT
+			INT_VAR
+				match_opcode = 206
+			STR_VAR
+				match_resource = ~spin572~
+		END
+		LPF DELETE_EFFECT
+			INT_VAR
+				match_opcode = 206
+			STR_VAR
+				match_resource = ~spwi613~
+		END
+		LPF DELETE_EFFECT
+			INT_VAR
+				match_opcode = 206
+			STR_VAR
+				match_resource = ~spcl522~
+		END
+		LPF DELETE_EFFECT
+			INT_VAR
+				match_opcode = 101
+			STR_VAR
+				match_parameter2 = 126
+		END
+		LPF DELETE_EFFECT
+			INT_VAR
+				match_opcode = 101
+			STR_VAR
+				match_parameter2 = 16
+		END
+		LPF DELETE_EFFECT
+			INT_VAR
+				match_opcode = 240
+			STR_VAR
+				match_parameter2 = 38
+		END
+		LPF DELETE_EFFECT
+			INT_VAR
+				match_opcode = 240
+			STR_VAR
+				match_parameter2 = 195
+		END
+		LPF DELETE_EFFECT
+			INT_VAR
+				match_opcode = 169
+			STR_VAR
+				match_parameter2 = 38
+		END
+		LPF DELETE_EFFECT
+			INT_VAR
+				match_opcode = 169
+			STR_VAR
+				match_parameter2 = 195
+		END

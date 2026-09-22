@@ -1,0 +1,55 @@
+@0001 =~, and 5% in Hide in Shadows.~
+
+@0002 =~, and 5% in Hide in Shadows.
+– Sneak Attack: Starting at level 5, may apply 1d6 additional poison damage to a blind, stunned, feebleminded, slowed, panicked or prone enemy on hit. Additional damage die is gained at levels 10, 15, 20, 30 and 40 to a maximum of 6d6.~
+
+@1001 = ~– Backstab ability reaches x7 multiplier instead of capping at x5. (Note: This cap is not reached until higher levels, which can only be attained in Baldur's Gate II: Enhanced Edition.)~
+
+@1011 = ~– Backstab ability reaches x7 multiplier instead of capping at x5.
+  Level 17-20: x6
+  Level 21-40: x7~
+
+@1002 = ~– +1 backstab multiplier compared to regular thief, increasing to +2 at level 21.
+– +50% to Hide in Shadows and Move Silently at level 1.
+– +4 thac0 while invisible or sneaking.
+– +4 missile damage while invisible or sneaking. Bonus increases by 2 at level 5 and every fifth level thereafter.~
+
+@1003 = ~– \+1 bonus to hit and damage rolls.~
+
+@2001 = ~Special Snare: Slow~
+
+@2011 = ~SPECIAL SNARE: SLOW
+Deals 3d8+5 missile damage and slows target for 5 rounds if a Save vs. Spell with a –4 penalty is failed.~
+
+@2002 = ~Special Snare: Stun~
+
+@2022 = ~SPECIAL SNARE: STUN
+Deals 4d8+5 missile damage and holds target for 5 rounds if a Save vs. Spell with a –1 penalty is failed.~
+
+@2003 = ~Special Snare: Sphere~
+
+@2033 = ~SPECIAL SNARE: SPHERE
+Erects an Otiluke's Resilient Sphere around the target for 7 rounds if a Save vs. Spell is failed.~
+
+@2004 = ~Special Snare: Maze~
+
+@2044 = ~SPECIAL SNARE: MAZE
+Mazes the target.~
+
+@3001 = ~bonus to hit and damage rolls every 5 levels.~
+
+@3002 = ~bonus to hit and damage rolls every 5 levels.
+– + 1/2 APR at levels 10 and 20.~
+
+@3003 = ~– May place 3 slots into Two-Weapon Style.~
+
+@3004 = ~– May place 3 slots into Two-Weapon Style.
+– May use the Offensive Spin once per day. Gains one use at level 1 and an additional use each every fifth level thereafter.
+
+OFFENSIVE SPIN: During the next 4 rounds, the Blade's movement rate doubles and <PRO_HESHE> gains a +2 bonus to hit and damage rolls as well as an extra attack per round. All attacks deal maximum damage for the duration. Offensive Spin may not be used in conjunction with the Haste or Improved Haste spells.~
+
+@3005 = ~– May not use Backstab ability.~
+
+@3006 = ~– May not use Backstab ability.
+– May not hide in shadows.
+– May not set traps.~

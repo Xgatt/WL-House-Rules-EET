@@ -1,0 +1,45 @@
+DEFINE_PATCH_FUNCTION TO_BASE36
+    INT_VAR
+        value     = 0
+        minDigits = 1
+    RET
+        result
+BEGIN
+    TEXT_SPRINT result ~~
+    PATCH_DEFINE_ARRAY digits BEGIN ~0~ ~1~ ~2~ ~3~ ~4~ ~5~ ~6~ ~7~ ~8~ ~9~ ~A~ ~B~ ~C~ ~D~ ~E~ ~F~ ~G~ ~H~ ~I~ ~J~ ~K~ ~L~ ~M~ ~N~ ~O~ ~P~ ~Q~ ~R~ ~S~ ~T~ ~U~ ~V~ ~W~ ~X~ ~Y~ ~Z~ END
+
+    PATCH_IF (value < 0) BEGIN
+	    SET signed = 1
+	    SET value = 0 - value
+    END ELSE BEGIN
+	    SET signed = 0
+    END
+
+    WHILE (value != 0) BEGIN
+        SET base36Digit = (value MODULO 36)
+        SET value = value / 36
+        TEXT_SPRINT charDigit $EVAL digits(~%base36Digit%~)
+        TEXT_SPRINT result ~%charDigit%%result%~
+    END
+
+    WHILE (STRING_LENGTH ~%result%~ < minDigits) BEGIN
+        TEXT_SPRINT result ~0%result%~
+    END
+
+    PATCH_IF (signed) BEGIN
+	    TEXT_SPRINT result ~-%result%~
+    END
+END
+
+// Action version of TO_BASE36
+DEFINE_ACTION_FUNCTION TO_BASE36
+    INT_VAR
+        value     = 0
+        minDigits = 1
+    RET
+        result
+    BEGIN
+        OUTER_PATCH ~~ BEGIN
+        LPF TO_BASE36 INT_VAR value = value minDigits = minDigits RET result END
+    END
+END

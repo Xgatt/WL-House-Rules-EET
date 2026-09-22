@@ -1,0 +1,77 @@
+WITH_TRA ~wl_houserules/lang/%LANGUAGE%/wl_replace_identify.tra~ BEGIN
+
+ACTION_IF FILE_EXISTS_IN_GAME ~statdesc.2da~ BEGIN
+	OUTER_SPRINT statdescstring @5
+	OUTER_SET statdescstrref = RESOLVE_STR_REF (~%statdescstring%~)
+	COPY_EXISTING ~statdesc.2da~ ~override~
+		COUNT_2DA_ROWS 3 nrows
+			APPEND ~statdesc.2da~ ~%nrows%	%statdescstrref%	wlstri01~
+END
+
+COPY ~wl_houserules/components/spell_tweaks/replace_identify/BAM/wlstri01.BAM~ ~override~
+COPY ~wl_houserules/components/spell_tweaks/replace_identify/BAM/wlstri02.BAM~ ~override~
+
+COPY ~wl_houserules/components/spell_tweaks/replace_identify/SPL/wlstri01.spl~ ~override~
+	SAY 0x08 @1
+	SAY 0x50 @2
+LPF ADD_SPELL_EFFECT
+	INT_VAR opcode = 142 target = 1 timing = 0 duration = 2400 parameter2 = %nrows% resist_dispel = 2
+END
+
+COPY ~wl_houserules/components/spell_tweaks/replace_identify/SPL/wlstri02.spl~ ~override~
+	SAY 0x08 @3
+	SAY 0x50 @4
+LPF ADD_SPELL_EFFECT
+	INT_VAR opcode = 142 target = 1 timing = 0 duration = 2400 parameter2 = %nrows% resist_dispel = 2
+END
+
+COPY_EXISTING ~kitlist.2da~ ~override~
+	COUNT_2DA_ROWS 9 numrows
+	FOR (row = 3; row < numrows; ++row) BEGIN
+		READ_2DA_ENTRY row 1 9 name
+		READ_2DA_ENTRY row 5 9 clab
+		READ_2DA_ENTRY row 8 9 class
+		PATCH_IF
+			(class = 1) OR
+			(class = 5) OR
+			(class = 19)
+		BEGIN
+			INNER_ACTION BEGIN
+				ACTION_IF !(FILE_EXISTS ~%clab%.2da~) BEGIN
+					COPY ~wl_houserules/components/spell_tweaks/replace_identify/2da/wlstri00.2da~ ~override/%clab%.2da~
+				END
+				APPEND ~%clab%.2da~ ~WL_LOR00    GA_WLSTRI01 ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****      ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****~
+			END
+		END
+		PATCH_IF
+			(class = 3) OR
+			(class = 11) OR
+			(class = 21)
+		BEGIN
+			INNER_ACTION BEGIN
+				APPEND ~%clab%.2da~ ~WL_LOR00    GA_WLSTRI02 ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****      ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****~
+			END
+		END
+	END
+BUT_ONLY
+
+ACTION_IF !(FILE_EXISTS ~clabma01.2da~) BEGIN
+COPY ~wl_houserules/components/spell_tweaks/replace_identify/2da/wlstri00.2da~ ~override/clabma01.2da~
+END
+
+APPEND ~clabma01.2da~ ~WL_LOR00    GA_WLSTRI01 ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****      ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****~
+APPEND ~clabba01.2da~ ~WL_LOR00    GA_WLSTRI01 ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****      ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****~
+APPEND ~clabpr01.2da~ ~WL_LOR00    GA_WLSTRI02 ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****      ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****~
+APPEND ~clabdr01.2da~ ~WL_LOR00    GA_WLSTRI02 ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****      ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****~
+APPEND ~clabsh01.2da~ ~WL_LOR00    GA_WLSTRI02 ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****      ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****~
+
+APPEND ~hidespl.2da~ ~SPWI110    1          0          0~
+COPY_EXISTING ~scrl75.itm~ ~override~
+	LPF ALTER_ITEM_HEADER
+		INT_VAR header = 2 new_header_type = 0
+	END
+	LPF DELETE_ITEM_HEADER
+		INT_VAR header_type = 0
+	END
+
+END

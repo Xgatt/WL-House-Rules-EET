@@ -1,0 +1,40 @@
+WITH_TRA ~wl_houserules/lang/%LANGUAGE%/wl_item_tweaks.tra~ BEGIN 
+
+COPY_EXISTING_REGEXP GLOB ~^.+\.itm~ ~override~ 
+SPRINT hook @20
+SPRINT add @21
+	PATCH_IF (%SOURCE_SIZE% > 0x70) BEGIN
+		READ_SHORT 0x1c cat
+			PATCH_IF 
+			(cat = 16) BEGIN
+				LPF DELETE_EFFECT
+					INT_VAR
+						check_globals = 1
+						match_opcode = 1
+				END
+				LPF ADD_ITEM_EQEFFECT
+					INT_VAR
+						opcode = 1
+						target = 1
+						timing = 2
+						resist_dispel = 0
+						parameter1 = 1
+						parameter2 = 0
+				END	
+				FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+					READ_LONG "%index%" "valid"
+					PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+						READ_STRREF "%index%" "description"
+							PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~%hook%~) = 0 BEGIN // more validation
+								INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+									REPLACE_TEXTUALLY ~%hook%~ ~%add%~
+								END
+							SAY_EVALUATED "%index%" ~%new_desc%~
+							END
+					END
+				END
+			END
+	END
+BUT_ONLY
+
+END

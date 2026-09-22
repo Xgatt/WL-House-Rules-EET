@@ -1,0 +1,2 @@
+COPY ~wl_houserules/components/general_tweaks/lore_tweaks/2da/lore.2da~ ~override~
+COPY ~wl_houserules/components/general_tweaks/lore_tweaks/2da/lorebon.2da~ ~override~

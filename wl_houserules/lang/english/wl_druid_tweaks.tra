@@ -1,0 +1,41 @@
+@2001 =~Werewolf Form~
+
+@2002 =~Werewolf Form:
+The caster transforms into a werewolf for 60 seconds and receives bonuses based on level.
+
+Level 1-4: Base AC set to 2, 1d6 slashing attack with base APR set to 1, regenerate 1hp every 10s.
+
+Level 5-9: Base AC set to 0, 1d6+1 slashing attack with base APR set to 1.5, regenerate 1hp every 8s, +1 to STR/DEX/CON.
+
+Level 10-14: Base AC set to -2, 1d8+2 slashing attack with base APR set to 2, regenerate 1hp every 6s, +2 to STR/DEX/CON, +10% to physical resistances.
+
+Level 15-19: Base AC set to -4, 1d8+3 slashing attack with base APR set to 2, regenerate 1hp every 4s, +3 to STR/DEX/CON, +20% to physical resistances, may cast spells while transformed.
+
+Level 20-24: Base AC set to -6, 1d10+4 slashing attack with base APR set to 2.5, regenerate 1hp every 2s, +4 to STR/DEX/CON, +30% to physical resistances, may cast spells while transformed.
+
+Level 25-29: Base AC set to -8, 1d10+5 slashing attack with base APR set to 2.5, regenerate 1hp every 1s, +5 to STR/DEX/CON, +40% to physical resistances, may cast spells while transformed.
+
+Level 30+: Base AC set to -10, 1d12+6 slashing attack with base APR set to 3, regenerate 2hp every 1s, +6 to STR/DEX/CON, +50% to physical resistances, may cast spells while transformed.~
+
+@2003 = ~– 13th level: May shapeshift into a greater werewolf once per day\.~
+
+@2004 = ~– May shapeshift into the form of a werewolf once per day\. Gains one use at level 1 and an additional use every 2 levels thereafter\.~
+
+@2005 = ~– May shapeshift into the form of a werewolf once per day. Gains one use every 5 levels starting at level 1.
+
+Werewolf Form:
+The caster transforms into a werewolf for 60 seconds and receives bonuses based on level.
+
+Level 1-4: Base AC set to 2, 1d6 slashing attack with base APR set to 1, regenerate 1hp every 10s.
+
+Level 5-9: Base AC set to 0, 1d6+1 slashing attack with base APR set to 1.5, regenerate 1hp every 8s, +1 to STR/DEX/CON.
+
+Level 10-14: Base AC set to -2, 1d8+2 slashing attack with base APR set to 2, regenerate 1hp every 6s, +2 to STR/DEX/CON, +10% to physical resistances.
+
+Level 15-19: Base AC set to -4, 1d8+3 slashing attack with base APR set to 2, regenerate 1hp every 4s, +3 to STR/DEX/CON, +20% to physical resistances, may cast spells while transformed.
+
+Level 20-24: Base AC set to -6, 1d10+4 slashing attack with base APR set to 2.5, regenerate 1hp every 2s, +4 to STR/DEX/CON, +30% to physical resistances, may cast spells while transformed.
+
+Level 25-29: Base AC set to -8, 1d10+5 slashing attack with base APR set to 2.5, regenerate 1hp every 1s, +5 to STR/DEX/CON, +40% to physical resistances, may cast spells while transformed.
+
+Level 30+: Base AC set to -10, 1d12+6 slashing attack with base APR set to 3, regenerate 2hp every 1s, +6 to STR/DEX/CON, +50% to physical resistances, may cast spells while transformed.~

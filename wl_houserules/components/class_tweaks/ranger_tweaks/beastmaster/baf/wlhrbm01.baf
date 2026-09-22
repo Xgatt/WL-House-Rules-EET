@@ -1,0 +1,89 @@
+IF
+	Global("wl_hrbmboost","LOCALS",0)
+	General(Myself,2)
+	Gender(Myself,6)
+	Kit(LastSummonerOf(Myself),BEASTMASTER)
+	LevelLT(LastSummonerOf(Myself),5)
+THEN
+	RESPONSE #100
+		SetGlobal("wl_hrbmboost","LOCALS",1)
+		ApplySpellRES("wlhrbm01",Myself)
+END
+
+IF
+	Global("wl_hrbmboost","LOCALS",0)
+	General(Myself,2)
+	Gender(Myself,6)
+	Kit(LastSummonerOf(Myself),BEASTMASTER)
+	LevelGT(LastSummonerOf(Myself),4)
+	LevelLT(LastSummonerOf(Myself),10)
+THEN
+	RESPONSE #100
+		SetGlobal("wl_hrbmboost","LOCALS",1)
+		ApplySpellRES("wlhrbm02",Myself)
+END
+
+IF
+	Global("wl_hrbmboost","LOCALS",0)
+	General(Myself,2)
+	Gender(Myself,6)
+	Kit(LastSummonerOf(Myself),BEASTMASTER)
+	LevelGT(LastSummonerOf(Myself),9)
+	LevelLT(LastSummonerOf(Myself),15)
+THEN
+	RESPONSE #100
+		SetGlobal("wl_hrbmboost","LOCALS",1)
+		ApplySpellRES("wlhrbm03",Myself)
+END
+
+IF
+	Global("wl_hrbmboost","LOCALS",0)
+	General(Myself,2)
+	Gender(Myself,6)
+	Kit(LastSummonerOf(Myself),BEASTMASTER)
+	LevelGT(LastSummonerOf(Myself),14)
+	LevelLT(LastSummonerOf(Myself),20)
+THEN
+	RESPONSE #100
+		SetGlobal("wl_hrbmboost","LOCALS",1)
+		ApplySpellRES("wlhrbm04",Myself)
+END
+
+IF
+	Global("wl_hrbmboost","LOCALS",0)
+	General(Myself,2)
+	Gender(Myself,6)
+	Kit(LastSummonerOf(Myself),BEASTMASTER)
+	LevelGT(LastSummonerOf(Myself),19)
+	LevelLT(LastSummonerOf(Myself),25)
+THEN
+	RESPONSE #100
+		SetGlobal("wl_hrbmboost","LOCALS",1)
+		ApplySpellRES("wlhrbm05",Myself)
+END
+
+IF
+	Global("wl_hrbmboost","LOCALS",0)
+	General(Myself,2)
+	Gender(Myself,6)
+	Kit(LastSummonerOf(Myself),BEASTMASTER)
+	LevelGT(LastSummonerOf(Myself),24)
+	LevelLT(LastSummonerOf(Myself),30)
+THEN
+	RESPONSE #100
+		SetGlobal("wl_hrbmboost","LOCALS",1)
+		ApplySpellRES("wlhrbm06",Myself)
+END
+
+IF
+	Global("wl_hrbmboost","LOCALS",0)
+	General(Myself,2)
+	Gender(Myself,6)
+	Kit(LastSummonerOf(Myself),BEASTMASTER)
+	LevelGT(LastSummonerOf(Myself),29)
+THEN
+	RESPONSE #100
+		SetGlobal("wl_hrbmboost","LOCALS",1)
+		ApplySpellRES("wlhrbm07",Myself)
+END
+

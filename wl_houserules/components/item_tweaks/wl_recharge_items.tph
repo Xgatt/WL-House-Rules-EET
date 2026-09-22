@@ -1,0 +1,42 @@
+WITH_TRA ~wl_houserules/lang/%LANGUAGE%/wl_item_tweaks.tra~ BEGIN
+
+INCLUDE ~wl_houserules/lib/to_base36.tpa~
+
+OUTER_SET index = "-1"
+COPY_EXISTING_REGEXP GLOB ~^.+\.itm~ ~override~
+	READ_SHORT 0x68 abnum
+	READ_LONG 0x18 flags
+	READ_SHORT 0x1c cat
+	READ_LONG 0x08 name
+	READ_SHORT 0x38 stack
+		PATCH_IF (
+		(abnum != 0) AND
+		!(flags BAND BIT0) = BIT0 AND
+		(BYTE_AT (0x74) == 3) AND
+		(SHORT_AT (0x94) != 0) AND
+		(SHORT_AT (0x96) == 1) AND
+		!(name = "-1") AND
+		((cat = 1) OR
+		(cat = 10) OR
+		(cat = 35) OR
+		(cat = 51))) BEGIN
+			TEXT_SPRINT item ~%SOURCE_RES%~
+			SET index += 1
+			WRITE_LONG 0x18 (flags BOR 0b00000000000000000000100000000000)
+			LPF TO_BASE36 INT_VAR value = index minDigits = 1 RET result END
+			TEXT_SPRINT dlg ~wlitrw%result%~
+			INNER_ACTION BEGIN
+				COPY ~%MOD_FOLDER%/components/item_tweaks/recharge_items/d/template.d~ ~override~
+					REPLACE_TEXTUALLY ~RdlgR~ ~%dlg%~
+					REPLACE_TEXTUALLY ~RitemR~ ~%item%~
+				COMPILE ~override/template.d~
+			END
+			INNER_ACTION BEGIN
+				OUTER_SET button = RESOLVE_STR_REF (@1)
+				COPY_EXISTING ~itemdial.2da~ ~override~
+				INSERT_2DA_ROW 0 3 ~%item%	%button%	%dlg%~
+			END
+		END
+BUT_ONLY
+
+END

@@ -1,0 +1,19 @@
+WITH_TRA ~wl_houserules/lang/%LANGUAGE%/wl_item_tweaks.tra~ BEGIN
+
+COPY_EXISTING ~belt09.itm~ ~override~
+LPF DELETE_ITEM_HEADER 
+	INT_VAR
+		header_type = "-1"
+END
+LPF ADD_ITEM_EQEFFECT
+	INT_VAR
+		opcode = 10
+		target = 1
+		timing = 2
+		resist_dispel = 2
+		parameter1 = 18
+		parameter2 = 1
+END	
+WRITE_LONG 0x54 RESOLVE_STR_REF (@19)
+
+END

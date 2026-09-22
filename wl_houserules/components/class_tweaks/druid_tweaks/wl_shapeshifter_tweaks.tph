@@ -1,0 +1,85 @@
+WITH_TRA ~wl_houserules/lang/%LANGUAGE%/wl_druid_tweaks.tra~ BEGIN
+
+COPY ~wl_houserules/components/class_tweaks/druid_tweaks/shapeshifter/spl/SPCL643.spl~ ~override~
+SAY 0x08 @2001
+SAY 0x0c @2001
+SAY 0x50 @2002
+COPY ~wl_houserules/components/class_tweaks/druid_tweaks/shapeshifter/itm/wldtss01.itm~ ~override~
+SAY 0x08 @2001
+SAY 0x0c @2001
+SAY 0x50 @2002
+COPY ~wl_houserules/components/class_tweaks/druid_tweaks/shapeshifter/itm/wldtss02.itm~ ~override~
+SAY 0x08 @2001
+SAY 0x0c @2001
+SAY 0x50 @2002
+COPY ~wl_houserules/components/class_tweaks/druid_tweaks/shapeshifter/itm/wldtss03.itm~ ~override~
+SAY 0x08 @2001
+SAY 0x0c @2001
+SAY 0x50 @2002
+COPY ~wl_houserules/components/class_tweaks/druid_tweaks/shapeshifter/itm/wldtss04.itm~ ~override~
+SAY 0x08 @2001
+SAY 0x0c @2001
+SAY 0x50 @2002
+COPY ~wl_houserules/components/class_tweaks/druid_tweaks/shapeshifter/itm/wldtss05.itm~ ~override~
+SAY 0x08 @2001
+SAY 0x0c @2001
+SAY 0x50 @2002
+COPY ~wl_houserules/components/class_tweaks/druid_tweaks/shapeshifter/itm/wldtss06.itm~ ~override~
+SAY 0x08 @2001
+SAY 0x0c @2001
+SAY 0x50 @2002
+COPY ~wl_houserules/components/class_tweaks/druid_tweaks/shapeshifter/itm/wldtss07.itm~ ~override~
+SAY 0x08 @2001
+SAY 0x0c @2001
+SAY 0x50 @2002
+
+COPY_EXISTING ~CLABDR03.2da~ ~override~
+REPLACE_TEXTUALLY ~GA_SPCL644~ ~****      ~
+REPLACE_TEXTUALLY ~GA_SPCL643~ ~****      ~
+
+ACTION_IF (FILE_EXISTS_IN_GAME ~CLABDR03.2DA~) BEGIN 
+	APPEND ~clabdr03.2DA~ ~WLSSABIL1   GA_SPCL643  ****        ****        ****        GA_SPCL643  ****        ****        ****        ****        GA_SPCL643  ****        ****        ****        ****        GA_SPCL643  ****        ****        ****        ****        GA_SPCL643 ****        ****        ****        ****        GA_SPCL643  ****        ****        ****        ****        GA_SPCL643  ****        ****        ****        ****        GA_SPCL643  ****        ****        ****        ****        GA_SPCL643~
+END
+
+
+COPY_EXISTING ~kitlist.2da~ ~override~ 
+	COUNT_2DA_ROWS 10 rows
+		FOR (row = 3 ; row < rows ; row = row + 1 ) BEGIN
+			READ_2DA_ENTRY row 1 10 name
+			READ_2DA_ENTRY row 4 10 string
+			PATCH_IF (~%name%~ STRING_EQUAL_CASE ~SHAPESHIFTER~) BEGIN
+				SPRINT find1 @2003
+				SPRINT find2 @2004
+				SPRINT replace @2005
+				SPRINT patch_string ~%string%~
+				GET_STRREF ~%string%~ desc
+				INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+					REPLACE_TEXTUALLY ~%find1%~ ~~
+					REPLACE_TEXTUALLY ~%find2%~ ~%replace%~
+				END
+			END
+		END
+		REPLACE ~%patch_string%~ ~%new_desc%~
+BUT_ONLY
+
+COPY_EXISTING ~clastext.2da~ ~override~ //update kit description in clastext
+	COUNT_2DA_ROWS 9 rows
+	FOR (row = 0 ; row < rows ; row += 1) BEGIN
+		READ_2DA_ENTRY row 0 9 name3
+		READ_2DA_ENTRY row 4 9 string3
+		PATCH_IF (~%name3%~ STRING_EQUAL_CASE ~SHAPESHIFTER~) BEGIN
+			SPRINT find1 @2003
+			SPRINT find2 @2004
+			SPRINT replace @2005
+			SPRINT patch_string ~%string3%~
+			GET_STRREF ~%string3%~ desc
+			INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+				REPLACE_TEXTUALLY ~%find1%~ ~~
+				REPLACE_TEXTUALLY ~%find2%~ ~%replace%~
+			END
+		END
+	END
+	REPLACE ~%patch_string%~ ~%new_desc%~
+BUT_ONLY
+
+END

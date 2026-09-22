@@ -1,0 +1,52 @@
+WITH_TRA ~wl_houserules/lang/%LANGUAGE%/wl_monk_tweaks.tra~ BEGIN
+
+// revise fist enchantment progression
+
+COPY_EXISTING ~MFIST4.itm~ ~override~ //get the name of the +1 fist
+	READ_LONG 0x0c nameadd1
+BUT_ONLY
+
+COPY_EXISTING ~MFIST3.itm~ ~override~ //apply the +1 fist name to the regular fist gained at lvl 6 and make it magical +1
+	WRITE_LONG 0x08 %nameadd1%
+	WRITE_LONG 0x0c %nameadd1%
+	READ_LONG 0x60 enchantment
+	PATCH_IF (%enchantment% = 0) THEN BEGIN
+		WRITE_LONG 0x60 1
+		LPF ALTER_ITEM_HEADER
+			INT_VAR
+				header_type = 1
+				thac0_bonus = 1
+				damage_bonus = 1
+		END
+	END
+BUT_ONLY
+
+COPY_EXISTING ~MONKFIST.2DA~ ~override~ //move the +2 fist from level 12 to level 9
+	REPLACE_TEXTUALLY ~MFIST4~ ~MFIST5~
+BUT_ONLY
+
+COPY_EXISTING ~clastext.2da~ ~override~ //update class description with the changes
+	COUNT_2DA_ROWS 9 rows
+	FOR (row = 0 ; row < rows ; row += 1) BEGIN
+		READ_2DA_ENTRY row 0 9 name2
+		READ_2DA_ENTRY row 4 9 string2
+		PATCH_IF (~%name2%~ STRING_EQUAL_CASE ~MONK~) BEGIN
+			SPRINT find1 @1
+			SPRINT replace1 @2
+			SPRINT find2 @3
+			SPRINT replace2 @4
+			SPRINT find3 @5
+			SPRINT replace3 @9
+			SPRINT patch_string ~%string2%~
+			GET_STRREF ~%string2%~ desc
+			INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+				REPLACE_TEXTUALLY ~%find1%~ ~%replace1%~
+				REPLACE_TEXTUALLY ~%find2%~ ~%replace2%~
+				REPLACE_TEXTUALLY ~%find3%~ ~%replace3%~
+			END
+		END
+	END
+	REPLACE ~%patch_string%~ ~%new_desc%~
+BUT_ONLY
+
+END

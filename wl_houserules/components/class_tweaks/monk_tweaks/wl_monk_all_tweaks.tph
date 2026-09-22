@@ -1,0 +1,11 @@
+WITH_TRA ~wl_houserules/lang/%LANGUAGE%/wl_monk_tweaks.tra~ BEGIN
+
+INCLUDE "wl_houserules/components/class_tweaks/monk_tweaks/wl_monk_di_for_all.tph"
+
+INCLUDE "wl_houserules/components/class_tweaks/monk_tweaks/wl_monk_no_slowhaste_immunity.tph"
+
+INCLUDE "wl_houserules/components/class_tweaks/monk_tweaks/wl_monk_revised_fist.tph"
+
+INCLUDE "wl_houserules/components/class_tweaks/monk_tweaks/wl_monk_darkmoon_backstab.tph"
+
+END

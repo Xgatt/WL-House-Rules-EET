@@ -1,0 +1,397 @@
+WITH_TRA ~wl_HouseRules/lang/%LANGUAGE%/wl_thief_tweaks.tra~ BEGIN
+
+// add sneak attack to base thieves
+COPY ~wl_houserules/components/class_tweaks/thief_tweaks/sneak_attack~ ~override~
+APPEND ~clabth01.2DA~ ~WLHRSA   ****         ****        ****        ****        AP_WLHRSAB1 ****        ****        ****        ****        AP_WLHRSAB2 ****        ****        ****        ****        AP_WLHRSAB3 ****        ****        ****        ****        AP_WLHRSAB4 ****        ****        ****        ****        ****        ****        ****        ****        ****        AP_WLHRSAB5 ****        ****        ****        ****        ****        ****        ****        ****        ****        AP_WLHRSAB6~
+
+// add it to kits
+COPY_EXISTING ~kitlist.2da~ ~override~
+	COUNT_2DA_ROWS 10 rows1
+	FOR (row1 = 1; row1 < rows1; ++row1) BEGIN
+		READ_2DA_ENTRY row1 1 10 name1
+		READ_2DA_ENTRY row1 4 10 string1
+		READ_2DA_ENTRY row1 5 10 clab
+		READ_2DA_ENTRY row1 8 10 class
+		PATCH_IF (class = 4) BEGIN
+			INNER_ACTION BEGIN 
+				APPEND ~%clab%.2DA~ ~WLHRSA   ****         ****        ****        ****        AP_WLHRSAB1 ****        ****        ****        ****        AP_WLHRSAB2 ****        ****        ****        ****        AP_WLHRSAB3 ****        ****        ****        ****        AP_WLHRSAB4 ****        ****        ****        ****        ****        ****        ****        ****        ****        AP_WLHRSAB5 ****        ****        ****        ****        ****        ****        ****        ****        ****        AP_WLHRSAB6~
+			END
+		END
+	END
+BUT_ONLY
+
+// edit the class description to reflect the changes
+COPY_EXISTING ~clastext.2da~ ~override~ 
+	COUNT_2DA_ROWS 9 IA_rows
+		FOR (IA_row = 0 ; IA_row < IA_rows ; IA_row += 1) BEGIN
+			READ_2DA_ENTRY IA_row 0 9 IA_name
+			READ_2DA_ENTRY IA_row 4 9 IA_string
+				PATCH_IF (~%IA_name%~ STRING_EQUAL_CASE ~THIEF~) BEGIN
+					SPRINT IA_find @0001
+					SPRINT IA_replace @0002
+					SPRINT patch_string ~%IA_string%~
+					GET_STRREF ~%IA_string%~ desc
+					INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+						REPLACE_TEXTUALLY ~%IA_find%~ ~%IA_replace%~
+					END
+				END
+		END
+		REPLACE ~%patch_string%~ ~%new_desc%~
+		BUT_ONLY
+
+// Add it to npc thieves
+COPY_EXISTING_REGEXP GLOB ~^.+\.cre~ ~override~ 
+	READ_BYTE 0x273 class
+	READ_ASCII 0x280 sname
+		PATCH_IF (
+			(NOT FILE_CONTAINS_EVALUATED(~pdialog.2da~ ~%sname%~)) AND
+			(NOT FILE_CONTAINS_EVALUATED(~bddialog.2da~ ~%sname%~)) AND
+			((class = 4) OR // thief
+			(class = 13) OR // mage_thief
+			(class = 9) OR // fighter_thief
+			(class = 10) OR // fighter_mage_thief
+			(class = 15) OR // cleric_thief
+			(class = 205)) // thief_all
+		) THEN BEGIN 
+				READ_BYTE 0x234 level1
+				READ_BYTE 0x235 level2
+				READ_BYTE 0x236 level3
+				PATCH_IF (
+					((level1 >= 5) AND
+					(level1 <= 9)) OR
+					((level2 >= 5) AND
+					(level2 <= 9)) OR
+					((level3 >= 5) AND
+					(level3 <= 9))) BEGIN
+						DEFINE_ASSOCIATIVE_ARRAY thieves1 BEGIN
+							~%SOURCE_RES%.cre~ => 0
+						END
+					END
+				PATCH_IF (
+					((level1 >= 10) AND
+					(level1 <= 14)) OR
+					((level2 >= 10) AND
+					(level2 <= 14)) OR
+					((level3 >= 10) AND
+					(level3 <= 14))) BEGIN
+						DEFINE_ASSOCIATIVE_ARRAY thieves2 BEGIN
+							~%SOURCE_RES%.cre~ => 0
+						END
+					END
+				PATCH_IF (
+					((level1 >= 15) AND
+					(level1 <= 19)) OR
+					((level2 >= 15) AND
+					(level2 <= 19)) OR
+					((level3 >= 15) AND
+					(level3 <= 19))) BEGIN
+						DEFINE_ASSOCIATIVE_ARRAY thieves3 BEGIN
+							~%SOURCE_RES%.cre~ => 0
+						END
+					END
+				PATCH_IF (
+					((level1 >= 20) AND
+					(level1 <= 29)) OR
+					((level2 >= 20) AND
+					(level2 <= 29)) OR
+					((level3 >= 20) AND
+					(level3 <= 29))) BEGIN
+						DEFINE_ASSOCIATIVE_ARRAY thieves4 BEGIN
+							~%SOURCE_RES%.cre~ => 0
+						END
+					END
+				PATCH_IF (
+					((level1 >= 30) AND
+					(level1 <= 39)) OR
+					((level2 >= 30) AND
+					(level2 <= 39)) OR
+					((level3 >= 30) AND
+					(level3 <= 39))) BEGIN
+						DEFINE_ASSOCIATIVE_ARRAY thieves5 BEGIN
+							~%SOURCE_RES%.cre~ => 0
+						END
+					END
+				PATCH_IF (
+					(level1 = 40) OR
+					(level2 = 40) OR
+					(level3 = 40)) BEGIN
+						DEFINE_ASSOCIATIVE_ARRAY thieves6 BEGIN
+							~%SOURCE_RES%.cre~ => 0
+						END
+					END
+			END
+BUT_ONLY
+
+ACTION_PHP_EACH thieves1 AS thief1 => 0 BEGIN
+COPY_EXISTING ~%thief1%~ ~override~
+	LPF DELETE_EFFECT
+		STR_VAR
+			match_resource = ~wlhrsac1~
+		END
+		LPF DELETE_EFFECT
+			STR_VAR
+				match_resource = ~wlhrsac2~
+			END
+		LPF DELETE_EFFECT
+			STR_VAR
+				match_resource = ~wlhrsac3~
+			END
+		LPF DELETE_EFFECT
+			STR_VAR
+				match_resource = ~wlhrsac4~
+		END
+		LPF DELETE_EFFECT
+			STR_VAR
+				match_resource = ~wlhrsac5~
+		END
+		LPF DELETE_EFFECT
+			STR_VAR
+				match_resource = ~wlhrsac6~
+		END
+		LPF ADD_CRE_EFFECT
+			INT_VAR
+				opcode = 248
+				target = 2
+				timing = 9
+				parameter2 = 0
+			STR_VAR
+				resource = ~wlhrsac1~
+			END
+		LPF ADD_CRE_EFFECT
+			INT_VAR
+				opcode = 249
+				target = 2
+				timing = 9
+			STR_VAR
+				resource = ~wlhrsac1~
+		END
+END
+
+ACTION_PHP_EACH thieves2 AS thief2 => 0 BEGIN
+COPY_EXISTING ~%thief2%~ ~override~
+						LPF DELETE_EFFECT
+							STR_VAR
+								match_resource = ~wlhrsac1~
+						END
+						LPF DELETE_EFFECT
+							STR_VAR
+								match_resource = ~wlhrsac2~
+						END
+						LPF DELETE_EFFECT
+							STR_VAR
+								match_resource = ~wlhrsac3~
+						END
+						LPF DELETE_EFFECT
+							STR_VAR
+								match_resource = ~wlhrsac4~
+						END
+						LPF DELETE_EFFECT
+							STR_VAR
+								match_resource = ~wlhrsac5~
+						END
+						LPF DELETE_EFFECT
+							STR_VAR
+								match_resource = ~wlhrsac6~
+						END
+						LPF ADD_CRE_EFFECT
+							INT_VAR
+								opcode = 248
+								target = 2
+								timing = 9
+								parameter2 = 0
+							STR_VAR
+								resource = ~wlhrsac2~
+						END
+						LPF ADD_CRE_EFFECT
+							INT_VAR
+								opcode = 249
+								target = 2
+								timing = 9
+							STR_VAR
+								resource = ~wlhrsac2~
+						END
+END
+
+ACTION_PHP_EACH thieves3 AS thief3 => 0 BEGIN
+COPY_EXISTING ~%thief3%~ ~override~
+						LPF DELETE_EFFECT
+							STR_VAR
+								match_resource = ~wlhrsac1~
+						END
+						LPF DELETE_EFFECT
+							STR_VAR
+								match_resource = ~wlhrsac2~
+						END
+						LPF DELETE_EFFECT
+							STR_VAR
+								match_resource = ~wlhrsac3~
+						END
+						LPF DELETE_EFFECT
+							STR_VAR
+								match_resource = ~wlhrsac4~
+						END
+						LPF DELETE_EFFECT
+							STR_VAR
+								match_resource = ~wlhrsac5~
+						END
+						LPF DELETE_EFFECT
+							STR_VAR
+								match_resource = ~wlhrsac6~
+						END
+						LPF ADD_CRE_EFFECT
+							INT_VAR
+								opcode = 248
+								target = 2
+								timing = 9
+								parameter2 = 0
+							STR_VAR
+								resource = ~wlhrsac3~
+						END
+						LPF ADD_CRE_EFFECT
+							INT_VAR
+								opcode = 249
+								target = 2
+								timing = 9
+							STR_VAR
+								resource = ~wlhrsac3~
+						END
+END
+
+ACTION_PHP_EACH thieves4 AS thief4 => 0 BEGIN
+COPY_EXISTING ~%thief4%~ ~override~
+						LPF DELETE_EFFECT
+							STR_VAR
+								match_resource = ~wlhrsac1~
+						END
+						LPF DELETE_EFFECT
+							STR_VAR
+								match_resource = ~wlhrsac2~
+						END
+						LPF DELETE_EFFECT
+							STR_VAR
+								match_resource = ~wlhrsac3~
+						END
+						LPF DELETE_EFFECT
+							STR_VAR
+								match_resource = ~wlhrsac4~
+						END
+						LPF DELETE_EFFECT
+							STR_VAR
+								match_resource = ~wlhrsac5~
+						END
+						LPF DELETE_EFFECT
+							STR_VAR
+								match_resource = ~wlhrsac6~
+						END
+						LPF ADD_CRE_EFFECT
+							INT_VAR
+								opcode = 248
+								target = 2
+								timing = 9
+								parameter2 = 0
+							STR_VAR
+								resource = ~wlhrsac4~
+						END
+						LPF ADD_CRE_EFFECT
+							INT_VAR
+								opcode = 249
+								target = 2
+								timing = 9
+							STR_VAR
+								resource = ~wlhrsac4~
+						END
+END
+
+ACTION_PHP_EACH thieves5 AS thief5 => 0 BEGIN
+COPY_EXISTING ~%thief5%~ ~override~
+						LPF DELETE_EFFECT
+							STR_VAR
+								match_resource = ~wlhrsac1~
+						END
+						LPF DELETE_EFFECT
+							STR_VAR
+								match_resource = ~wlhrsac2~
+						END
+						LPF DELETE_EFFECT
+							STR_VAR
+								match_resource = ~wlhrsac3~
+						END
+						LPF DELETE_EFFECT
+							STR_VAR
+								match_resource = ~wlhrsac4~
+						END
+						LPF DELETE_EFFECT
+							STR_VAR
+								match_resource = ~wlhrsac5~
+						END
+						LPF DELETE_EFFECT
+							STR_VAR
+								match_resource = ~wlhrsac6~
+						END
+						LPF ADD_CRE_EFFECT
+							INT_VAR
+								opcode = 248
+								target = 2
+								timing = 9
+								parameter2 = 0
+							STR_VAR
+								resource = ~wlhrsac5~
+						END
+						LPF ADD_CRE_EFFECT
+							INT_VAR
+								opcode = 249
+								target = 2
+								timing = 9
+							STR_VAR
+								resource = ~wlhrsac5~
+						END
+END
+
+ACTION_PHP_EACH thieves6 AS thief6 => 0 BEGIN
+COPY_EXISTING ~%thief6%~ ~override~
+						LPF DELETE_EFFECT
+							STR_VAR
+								match_resource = ~wlhrsac1~
+						END
+						LPF DELETE_EFFECT
+							STR_VAR
+								match_resource = ~wlhrsac2~
+						END
+						LPF DELETE_EFFECT
+							STR_VAR
+								match_resource = ~wlhrsac3~
+						END
+						LPF DELETE_EFFECT
+							STR_VAR
+								match_resource = ~wlhrsac4~
+						END
+						LPF DELETE_EFFECT
+							STR_VAR
+								match_resource = ~wlhrsac5~
+						END
+						LPF DELETE_EFFECT
+							STR_VAR
+								match_resource = ~wlhrsac6~
+						END
+						LPF ADD_CRE_EFFECT
+							INT_VAR
+								opcode = 248
+								target = 2
+								timing = 9
+								parameter2 = 0
+							STR_VAR
+								resource = ~wlhrsac6~
+						END
+						LPF ADD_CRE_EFFECT
+							INT_VAR
+								opcode = 249
+								target = 2
+								timing = 9
+							STR_VAR
+								resource = ~wlhrsac6~
+						END
+					
+END
+
+
+END

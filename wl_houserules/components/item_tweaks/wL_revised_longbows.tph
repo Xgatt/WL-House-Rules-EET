@@ -1,0 +1,31 @@
+WITH_TRA ~wl_houserules/lang/%LANGUAGE%/wl_item_tweaks.tra~ BEGIN 
+
+COPY_EXISTING_REGEXP GLOB ~^.+\.itm~ ~override~ 
+PATCH_IF (%SOURCE_SIZE% > 0x70) BEGIN
+	READ_SHORT 0x1c cat
+	READ_BYTE 0x31 prof
+		PATCH_IF 
+			(cat = 15) AND
+			(prof = 104) BEGIN
+				LPF ALTER_ITEM_HEADER
+					INT_VAR
+						header_type = 4
+						flag_strength_damage = 1
+				END
+				LPF ALTER_ITEM_HEADER
+					INT_VAR
+						header_type = 2
+						flag_strength_damage = 1
+				END
+				LPF ALTER_ITEM_EFFECT
+					INT_VAR
+						check_globals = 1
+						match_opcode = 1
+						parameter1 = 1
+				END
+
+			END
+	END
+BUT_ONLY
+
+END

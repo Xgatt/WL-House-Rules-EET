@@ -1,0 +1,54 @@
+NEW:
+
+All or nothing:
+
+1 = crit miss effect
+1a = crit hit/miss chance 1
+1b = crit hit/miss chance 2
+1c = crit hit/miss chance 3
+
+Others:
+
+2 = final gambit
+3a = chaos shield
+3b = imp chaos shield
+4 = nahal's
+99 = disable casting button
+
+OLD:
+
+Chaos Song:
+
+05 = change				=	5x
+5b = good/bad pick		=	5
+
+5+ = benefit			=	5a
+5d = enemy stun			=	5b
+5f = enemy dmg			=	5c
+5g = party buff			=	5d
+5j = enemy debuff		=	5e
+5k = berserk enemy		=	5f
+
+5- = hindrance			=	5g
+5c = party stun			=	5h
+5e = party damage		=	5i
+5h = enemy buff			=	5j
+5i = party debuff		=	5k
+5l = berserk party		=	5l
+
+Summon:
+
+02 = base, duration scale
+2b = enemy summons
+2c = all summons
+
+Others:
+
+03 = wild magic 50% 				v
+
+04 = final gambit					v
+
+6a = chaos shield					v
+6b = improved chaos shield			v
+
+7 = nahal's							v

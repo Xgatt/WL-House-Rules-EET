@@ -1,0 +1,59 @@
+WITH_TRA ~wl_houserules/lang/%LANGUAGE%/wl_paladin_tweaks.tra~ BEGIN
+ 
+//add smite to all paladin kits
+COPY_EXISTING ~kitlist.2da~ ~override~ 
+	COUNT_2DA_ROWS 9 numrows
+	FOR (row = 3; row < numrows; ++row) BEGIN
+		READ_2DA_ENTRY row 1 9 name
+		READ_2DA_ENTRY row 5 9 clab
+		READ_2DA_ENTRY row 8 9 class
+		PATCH_IF (class = 6) AND !(~%name%~ STRING_EQUAL_CASE ~Blackguard~) BEGIN
+			INNER_ACTION BEGIN
+				APPEND ~%clab%.2da~ ~WL_BOJ00    GA_WLHRPT00 ****        ****        ****        ****        ****        ****        ****        ****        GA_WLHRPT00 ****        ****        ****        ****        ****        ****        ****        ****        ****        GA_WLHRPT00 ****      ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****~
+			END
+		END
+		PATCH_IF (class = 6) AND (~%name%~ STRING_EQUAL_CASE ~Blackguard~) BEGIN
+			INNER_ACTION BEGIN
+				APPEND ~%clab%.2da~ ~WL_BOJ00    GA_WLHRPT06 ****        ****        ****        ****        ****        ****        ****        ****        GA_WLHRPT06 ****        ****        ****        ****        ****        ****        ****        ****        ****        GA_WLHRPT06 ****      ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****~
+			END
+		END
+	END
+BUT_ONLY
+
+// add smite to trueclass
+COPY_EXISTING ~clabpa01.2da~ ~override~ 
+	APPEND ~clabpa01.2da~ ~WL_BOJ00    GA_WLHRPT00 ****        ****        ****        ****        ****        ****        ****        ****        GA_WLHRPT00 ****        ****        ****        ****        ****        ****        ****        ****        ****        GA_WLHRPT00 ****      ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****~
+
+COPY ~wl_houserules/components/class_tweaks/paladin_tweaks/smite/SPL~ ~override~ //copy the actual spell
+COPY ~wl_houserules/components/class_tweaks/paladin_tweaks/smite/SPL/wlhrpt00.SPL~ ~override~
+ SAY NAME1 @1
+ SAY NAME2 @1
+ SAY UNIDENTIFIED_DESC @2
+ SAY IDENTIFIED_DESC @2
+COPY ~wl_houserules/components/class_tweaks/paladin_tweaks/smite/SPL/wlhrpt06.SPL~ ~override~
+ SAY NAME1 @3
+ SAY NAME2 @3
+ SAY UNIDENTIFIED_DESC @4
+ SAY IDENTIFIED_DESC @4
+COPY ~wl_houserules/components/class_tweaks/paladin_tweaks/smite/EFF~ ~override~
+
+// update class description with the changes
+COPY_EXISTING ~clastext.2da~ ~override~ 
+	COUNT_2DA_ROWS 9 rows
+	FOR (row = 1; row < rows; ++row) BEGIN
+		READ_2DA_ENTRY row 0 9 name
+		READ_2DA_ENTRY row 4 9 string
+		PATCH_IF ~%name%~ STRING_EQUAL_CASE ~PALADIN~ BEGIN
+			SPRINT find @5
+			SPRINT replace @6
+			SPRINT patch_string ~%string%~
+			GET_STRREF ~%string%~ desc
+			INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+				REPLACE_TEXTUALLY ~%find%~ ~%replace%~
+			END
+		END
+	END
+	REPLACE ~%patch_string%~ ~%new_desc%~
+BUT_ONLY
+
+END

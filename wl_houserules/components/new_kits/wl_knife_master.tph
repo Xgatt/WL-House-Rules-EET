@@ -1,0 +1,20 @@
+WITH_TRA ~wl_houserules/lang/%LANGUAGE%/wl_knife_master.tra~ BEGIN
+
+INCLUDE ~wl_houserules/lib/a7#add_kit_ex.tpa~
+
+LAF ADD_KIT_EX
+	INT_VAR
+		kit_class		= 4
+		mixed 			= RESOLVE_STR_REF (@1)
+		help			= RESOLVE_STR_REF (@2)
+		
+	STR_VAR
+		kit_name		= ~wlmkkm~
+//		clab_path		= ~wl_houserules/components/new_kits/knife_master/2da/wlmkkm.2da~
+		weapprof		= ~0 1 0 0 1 0 0 1 0 1 1 0 0 1 1 5 0 1 0 0 0 0 1 1 0 1 1 1 1 1 1 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+		thiefskl		= ~30	10~
+	RET
+		kit_id
+END
+
+END

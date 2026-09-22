@@ -1,0 +1,83 @@
+WITH_TRA ~wl_HouseRules/lang/%LANGUAGE%/wl_thief_tweaks.tra~ BEGIN
+
+COPY ~wl_houserules/components/class_tweaks/thief_tweaks/assassin/spl/~ ~override~
+
+//give assassin +1 backstab at lvl 1 instead of lvl 16
+ACTION_IF (FILE_EXISTS_IN_GAME ~clabth02.2DA~) BEGIN 
+	COPY_EXISTING ~clabth02.2DA~ ~override~
+		COUNT_2DA_COLS cols
+			READ_2DA_ENTRIES_NOW rows cols
+				FOR (row = 1; row < rows; ++row) BEGIN
+					READ_2DA_ENTRY_FORMER rows row 17 ~abil~
+						PATCH_IF ~%abil%~ STRING_EQUAL_CASE ~AP_SPCL332~ BEGIN
+							SET patch_row = %row%
+						END
+				END
+		SET_2DA_ENTRY %patch_row% 1 cols AP_SPCL332
+		SET_2DA_ENTRY %patch_row% 17 cols ~****      ~
+		REPLACE_TEXTUALLY ~AP_SPCL421 ~ ~AP_WLTTAS01~
+	BUT_ONLY
+END
+
+//increase base stealth
+ACTION_IF (FILE_EXISTS_IN_GAME ~clasiskl.2DA~) BEGIN 
+	COPY_EXISTING ~clasiskl.2DA~ ~override~
+		COUNT_2DA_COLS cols
+			READ_2DA_ENTRIES_NOW rows (%cols%-1)
+				FOR (col = 1; col < (%cols%-1); ++col) BEGIN
+					READ_2DA_ENTRY_FORMER rows 0 %col% ~kit~
+						PATCH_IF (~%kit%~ STRING_EQUAL_CASE ~ASSASIN~) BEGIN
+								SET patch_col = (%col%+1)
+						END
+				END
+		SET_2DA_ENTRY 4 %patch_col% (%cols%-1) 50
+		SET_2DA_ENTRY 5 %patch_col% (%cols%-1) 50
+	BUT_ONLY
+END
+
+//update kit description with changes
+COPY_EXISTING ~kitlist.2da~ ~override~ 
+	COUNT_2DA_ROWS 10 rows
+		FOR (row = 3 ; row < rows ; row = row + 1 ) BEGIN
+			READ_2DA_ENTRY row 1 10 name
+			READ_2DA_ENTRY row 4 10 string
+			PATCH_IF (~%name%~ STRING_EQUAL_CASE ~ASSASIN~) BEGIN
+				SPRINT find1 @1001
+				SPRINT find2 @1011
+				SPRINT find3 @1003
+				SPRINT replace @1002
+				SPRINT patch_string ~%string%~
+				GET_STRREF ~%string%~ desc
+				INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+					REPLACE_TEXTUALLY ~%find1%~ ~%replace%~
+					REPLACE_TEXTUALLY ~%find2%~ ~%replace%~
+					REPLACE_TEXTUALLY ~%find3%~ ~~
+				END
+			END
+		END
+		REPLACE ~%patch_string%~ ~%new_desc%~
+BUT_ONLY
+
+COPY_EXISTING ~clastext.2da~ ~override~ //update kit description in clastext
+	COUNT_2DA_ROWS 9 rows
+	FOR (row = 0 ; row < rows ; row += 1) BEGIN
+		READ_2DA_ENTRY row 0 9 name3
+		READ_2DA_ENTRY row 4 9 string3
+		PATCH_IF (~%name3%~ STRING_EQUAL_CASE ~ASSASIN~) BEGIN
+			SPRINT find1 @1001
+			SPRINT find2 @1011
+			SPRINT find3 @1003
+			SPRINT replace @1002
+			SPRINT patch_string ~%string3%~
+			GET_STRREF ~%string3%~ desc
+			INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+				REPLACE_TEXTUALLY ~%find1%~ ~%replace%~
+				REPLACE_TEXTUALLY ~%find2%~ ~%replace%~
+				REPLACE_TEXTUALLY ~%find3%~ ~~
+			END
+		END
+	END
+	REPLACE ~%patch_string%~ ~%new_desc%~
+BUT_ONLY
+
+END

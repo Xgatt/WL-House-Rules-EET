@@ -1,0 +1,3 @@
+01/03/05/07/09: smite evil scaling
+11/12/13/14/15: smite good scaling
+02/04/06/08/10: damage scaling for all

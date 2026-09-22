@@ -1,0 +1,544 @@
+WITH_TRA ~wl_houserules/lang/%LANGUAGE%/wl_divine_soul.tra~ BEGIN
+
+INCLUDE ~wl_houserules/lib/a7#add_kit_ex.tpa~
+INCLUDE ~wl_houserules/lib/ClassSpellTool.tpa~
+
+COPY_EXISTING ~enginest.2da~ ~override~
+SET_2DA_ENTRY 223 1 2 RESOLVE_STR_REF (@5)
+SET_2DA_ENTRY 168 1 2 RESOLVE_STR_REF (@6)
+SET_2DA_ENTRY 169 1 2 RESOLVE_STR_REF (@7)
+
+LAF ADD_KIT_EX
+
+	INT_VAR
+		kit_class			=	21
+		mixed				=	RESOLVE_STR_REF (@1)
+		help				=	RESOLVE_STR_REF (@2)
+	
+	STR_VAR
+		kit_name			=	~WLDIVSOL~
+		clab_path			=	~wl_houserules/components/new_kits/divine_soul/2da/wlmkds01.2da~
+		alignmnt			=	~1 1 1 1 ! 1 1 1 1~
+		weapprof			=	~0 0 0 0 0 0 0 0 0 0 0 2 0 0 0 2 0 2 2 0 0 0 2 0 0 2 2 2 2 2 2 3~
+		thiefscl			=	~0 0 0 0 0 0 0 0~
+		clasiskl			=	~0 0 0 0 0 0 0 0~
+		luabbr				=	~Cl0~
+	RET
+		kit_id
+END
+
+COPY ~wl_houserules/components/new_kits/divine_soul/spl~ ~override~
+
+/*APPEND ~clabsh01.2da~ ~WL_HRMKDS  AP_WLMKDS01 ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****~
+COPY ~wl_houserules/components/new_kits/divine_soul/spl/wlmkds01.spl~ ~override~
+	LPF ADD_SPELL_EFFECT
+		INT_VAR
+			opcode = 181
+			target = 2
+			timing = 9
+			parameter1 = 62
+			parameter2 = 0
+			special = RESOLVE_STR_REF (@4)
+	END
+	LPF ADD_SPELL_EFFECT
+		INT_VAR
+			opcode = 181
+			target = 2
+			timing = 9
+			parameter1 = 19
+			parameter2 = 0
+			special = RESOLVE_STR_REF (@4)
+	END
+	LPF ADD_SPELL_EFFECT
+		INT_VAR
+			opcode = 181
+			target = 2
+			timing = 9
+			parameter1 = 20
+			parameter2 = 0
+			special = RESOLVE_STR_REF (@4)
+	END
+	LPF ADD_SPELL_EFFECT
+		INT_VAR
+			opcode = 181
+			target = 2
+			timing = 9
+			parameter1 = 21
+			parameter2 = 0
+			special = RESOLVE_STR_REF (@4)
+	END
+	LPF ADD_SPELL_EFFECT
+		INT_VAR
+			opcode = 181
+			target = 2
+			timing = 9
+			parameter1 = 22
+			parameter2 = 0
+			special = RESOLVE_STR_REF (@4)
+	END
+	LPF ADD_SPELL_EFFECT
+		INT_VAR
+			opcode = 181
+			target = 2
+			timing = 9
+			parameter1 = 23
+			parameter2 = 0
+			special = RESOLVE_STR_REF (@4)
+	END
+	LPF ADD_SPELL_EFFECT
+		INT_VAR
+			opcode = 181
+			target = 2
+			timing = 9
+			parameter1 = 27
+			parameter2 = 0
+			special = RESOLVE_STR_REF (@4)
+	END
+	LPF ADD_SPELL_EFFECT
+		INT_VAR
+			opcode = 181
+			target = 2
+			timing = 9
+			parameter1 = 30
+			parameter2 = 0
+			special = RESOLVE_STR_REF (@4)
+	END
+	LPF ADD_SPELL_EFFECT
+		INT_VAR
+			opcode = 181
+			target = 2
+			timing = 9
+			parameter1 = 31
+			parameter2 = 0
+			special = RESOLVE_STR_REF (@4)
+	END
+			
+COPY_EXISTING_REGEXP GLOB ~^.+\.itm~ ~override~
+	PATCH_IF (%SOURCE_SIZE% > 0x70) BEGIN
+		READ_ASCII 0x22 anim (2) NULL
+		READ_LONG 0x1e unuse
+			PATCH_IF (
+				(~%anim%~ STRING_EQUAL ~3A~) AND
+				((unuse BAND BIT30) = BIT30)) BEGIN
+					WRITE_LONG 0x1e (unuse BAND 0b10111111111111111111111111111111)
+					WRITE_SHORT 0x1c 62
+					LPF ADD_ITEM_EQEFFECT
+						INT_VAR
+							opcode = 319
+							target = 1
+							timing = 2
+							parameter1 = 11
+							parameter2 = 5
+							special = RESOLVE_STR_REF (@3)
+					END
+					LPF ADD_ITEM_EQEFFECT
+						INT_VAR
+							opcode = 319
+							target = 1
+							timing = 2
+							parameter1 = 11
+							parameter2 = 5
+							special = RESOLVE_STR_REF (@4)
+					END
+			END
+	END
+	
+	PATCH_IF (%SOURCE_SIZE% > 0x70) BEGIN
+		READ_SHORT 0x1c cat
+		READ_LONG 0x1e unuse
+			PATCH_IF (
+				(cat=19||cat=20||cat=21||cat=22||cat=23||cat=27||cat=30||cat=31) AND
+				((unuse BAND BIT30) = BIT30)) BEGIN
+					WRITE_LONG 0x1e (unuse BAND 0b10111111111111111111111111111111)
+					LPF ADD_ITEM_EQEFFECT
+						INT_VAR
+							opcode = 319
+							target = 1
+							timing = 2
+							parameter1 = 11
+							parameter2 = 5
+							special = RESOLVE_STR_REF (@3)
+					END
+					LPF ADD_ITEM_EQEFFECT
+						INT_VAR
+							opcode = 319
+							target = 1
+							timing = 2
+							parameter1 = 11
+							parameter2 = 5
+							special = RESOLVE_STR_REF (@4)
+					END
+			END
+	END
+BUT_ONLY
+*/
+
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR105~
+		kit_exclude=~{'WLDIVSOL'}~
+		class_include=~{'SHAMAN', 'DRUID_ALL', 'RANGER_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR204~
+		kit_exclude=~{'WLDIVSOL'}~
+		class_include=~{'SHAMAN', 'DRUID_ALL', 'RANGER_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR207~
+		kit_exclude=~{'WLDIVSOL'}~
+		class_include=~{'SHAMAN', 'DRUID_ALL', 'RANGER_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR302~
+		kit_exclude=~{'WLDIVSOL'}~
+		class_include=~{'SHAMAN', 'DRUID_ALL', 'RANGER_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR305~
+		kit_exclude=~{'WLDIVSOL'}~
+		class_include=~{'SHAMAN', 'DRUID_ALL', 'RANGER_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR319~
+		kit_exclude=~{'WLDIVSOL'}~
+		class_include=~{'SHAMAN', 'DRUID_ALL', 'RANGER_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR410~
+		kit_exclude=~{'WLDIVSOL'}~
+		class_include=~{'SHAMAN', 'DRUID_ALL', 'RANGER_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR506~
+		kit_exclude=~{'WLDIVSOL'}~
+		class_include=~{'SHAMAN', 'DRUID_ALL', 'RANGER_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR516~
+		kit_exclude=~{'WLDIVSOL'}~
+		class_include=~{'SHAMAN', 'DRUID_ALL', 'RANGER_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR517~
+		kit_exclude=~{'WLDIVSOL'}~
+		class_include=~{'SHAMAN', 'DRUID_ALL', 'RANGER_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR605~
+		kit_exclude=~{'WLDIVSOL'}~
+		class_include=~{'SHAMAN', 'DRUID_ALL', 'RANGER_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR610~
+		kit_exclude=~{'WLDIVSOL'}~
+		class_include=~{'SHAMAN', 'DRUID_ALL', 'RANGER_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR606~
+		kit_exclude=~{'WLDIVSOL'}~
+		class_include=~{'SHAMAN', 'DRUID_ALL', 'RANGER_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR702~
+		kit_exclude=~{'WLDIVSOL'}~
+		class_include=~{'SHAMAN', 'DRUID_ALL', 'RANGER_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR717~
+		kit_exclude=~{'WLDIVSOL'}~
+		class_include=~{'SHAMAN', 'DRUID_ALL', 'RANGER_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR704~
+		kit_exclude=~{'WLDIVSOL'}~
+		class_include=~{'SHAMAN', 'DRUID_ALL', 'RANGER_ALL'}~
+END
+
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR102~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR106~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR107~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR108~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR109~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR201~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR203~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR214~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR208~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR211~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR213~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR301~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR304~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR313~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR307~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR308~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR314~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR318~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR403~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR412~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR417~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR405~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR408~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR507~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR503~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR512~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR504~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR515~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR513~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR511~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR601~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR603~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR612~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR609~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR614~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR708~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR703~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR713~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR710~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR712~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR707~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR719~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR706~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR718~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+LAF ADD_CLASS_SPELL
+	STR_VAR
+		resref = ~SPPR715~
+		kit_include=~{'WLDIVSOL'}~
+		class_include=~{'CLERIC_ALL', 'PALADIN_ALL'}~
+END
+
+END

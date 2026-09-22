@@ -1,0 +1,90 @@
+WITH_TRA ~wl_HouseRules/lang/%LANGUAGE%/wl_thief_tweaks.tra~ BEGIN
+
+// give swashbuckler offensive spin every 5 levels and 1/2 apr at levels 10 and 20
+ACTION_IF (FILE_EXISTS_IN_GAME ~clabth03.2DA~) BEGIN 
+	APPEND ~clabth04.2DA~ ~WLSBABIL1   GA_SPCL521  ****        ****        ****        GA_SPCL521  ****        ****        ****        ****        GA_SPCL521  ****        ****        ****        ****        GA_SPCL521  ****        ****        ****        ****        GA_SPCL521 ****        ****        ****        ****        GA_SPCL521  ****        ****        ****        ****        GA_SPCL521  ****        ****        ****        ****        GA_SPCL521  ****        ****        ****        ****        GA_SPCL521~
+	APPEND ~clabth04.2DA~ ~WLSBABIL2   AP_WLTTSB02 ****        ****        ****        ****        ****        ****        ****        ****        AP_WLTTSB01 ****        ****        ****        ****        AP_WLTTSB01 ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****~
+END
+
+COPY ~wl_houserules/components/class_tweaks/thief_tweaks/swashbuckler/spl/WLTTSB01.spl~ ~override~
+COPY ~wl_houserules/components/class_tweaks/thief_tweaks/swashbuckler/spl/WLTTSB02.spl~ ~override~
+
+//disable stealth and set traps for swashbuckler
+COPY_EXISTING ~thiefscl.2da~ ~override~ 
+	COUNT_2DA_COLS cols
+	SET cols1 = (%cols% - 1)
+	COUNT_2DA_ROWS %cols% rows
+	FOR (row = 0 ; row < rows ; row += 1) BEGIN
+		READ_2DA_ENTRY row 0 cols1 skill
+			PATCH_IF (~%skill%~ STRING_EQUAL_CASE ~MOVE_SILENTLY~) BEGIN
+				SET patch_row1 = %row%
+			END
+			PATCH_IF (~%skill%~ STRING_EQUAL_CASE ~HIDE_IN_SHADOWS~) BEGIN
+				SET patch_row2 = %row%
+			END
+			PATCH_IF (~%skill%~ STRING_EQUAL_CASE ~SET_TRAPS~) BEGIN
+				SET patch_row3 = %row%
+			END
+	END
+	FOR (col = 1 ; col < cols1 ; ++col) BEGIN
+		READ_2DA_ENTRY 0 col cols1 name
+		PATCH_IF (~%name%~ STRING_EQUAL_CASE ~SWASHBUCKLER~) BEGIN
+			SET col1 = (%col% + 1)
+			SET_2DA_ENTRY %patch_row1% col1 cols1 0
+			SET_2DA_ENTRY %patch_row2% col1 cols1 0
+			SET_2DA_ENTRY %patch_row3% col1 cols1 0
+		END
+	END 
+BUT_ONLY
+
+// update kit description with changes
+COPY_EXISTING ~kitlist.2da~ ~override~ 
+	COUNT_2DA_ROWS 10 rows
+		FOR (row = 3 ; row < rows ; row = row + 1 ) BEGIN
+			READ_2DA_ENTRY row 1 10 name
+			READ_2DA_ENTRY row 4 10 string
+			PATCH_IF (~%name%~ STRING_EQUAL_CASE ~SWASHBUCKLER~) BEGIN
+				SPRINT find1 @3001
+				SPRINT replace1 @3002
+				SPRINT find2 @3003
+				SPRINT replace2 @3004
+				SPRINT find3 @3005
+				SPRINT replace3 @3006
+				SPRINT patch_string ~%string%~
+				GET_STRREF ~%string%~ desc
+				INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+					REPLACE_TEXTUALLY ~%find1%~ ~%replace1%~
+					REPLACE_TEXTUALLY ~%find2%~ ~%replace2%~
+					REPLACE_TEXTUALLY ~%find3%~ ~%replace3%~
+				END
+			END
+		END
+		REPLACE ~%patch_string%~ ~%new_desc%~
+BUT_ONLY
+
+COPY_EXISTING ~clastext.2da~ ~override~ //update kit description in clastext
+	COUNT_2DA_ROWS 9 rows
+	FOR (row = 0 ; row < rows ; row += 1) BEGIN
+		READ_2DA_ENTRY row 0 9 name3
+		READ_2DA_ENTRY row 4 9 string3
+		PATCH_IF (~%name3%~ STRING_EQUAL_CASE ~SWASHBUCKLER~) BEGIN
+			SPRINT find1 @3001
+			SPRINT replace1 @3002
+			SPRINT find2 @3003
+			SPRINT replace2 @3004
+			SPRINT find3 @3005
+			SPRINT replace3 @3006
+			SPRINT patch_string ~%string3%~
+			GET_STRREF ~%string3%~ desc
+			INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+				REPLACE_TEXTUALLY ~%find1%~ ~%replace1%~
+				REPLACE_TEXTUALLY ~%find2%~ ~%replace2%~
+				REPLACE_TEXTUALLY ~%find3%~ ~%replace3%~
+			END
+		END
+	END
+	REPLACE ~%patch_string%~ ~%new_desc%~
+BUT_ONLY
+
+
+END

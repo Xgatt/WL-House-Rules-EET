@@ -1,0 +1,75 @@
+WITH_TRA ~wl_houserules/lang/%LANGUAGE%/wl_chancer.tra~ BEGIN
+
+INCLUDE ~wl_houserules/lib/a7#add_kit_ex.tpa~
+
+LAF ADD_KIT_EX
+
+	INT_VAR
+		kit_class			=	5
+		mixed				=	RESOLVE_STR_REF (@1)
+		help				=	RESOLVE_STR_REF (@2)
+	
+	STR_VAR
+		kit_name			=	~WLCHANCER~
+		clab_path			=	~wl_houserules/components/new_kits/chancer/2da/wlmkch01.2da~
+		alignmnt			=	~0 0 0 0 0 0 1 1 1~
+	RET
+		kit_id
+END
+
+//All or nothing
+COPY ~wl_houserules/components/new_kits/chancer/spl/wlmkch1.spl~ ~override~
+COPY ~wl_houserules/components/new_kits/chancer/spl/wlmkch1a.spl~ ~override~
+COPY ~wl_houserules/components/new_kits/chancer/spl/wlmkch1b.spl~ ~override~
+COPY ~wl_houserules/components/new_kits/chancer/spl/wlmkch1c.spl~ ~override~
+
+COPY ~wl_houserules/components/new_kits/chancer/spl/wlmkch2.spl~ ~override~ //final gambit
+COPY ~wl_houserules/components/new_kits/chancer/spl/wlmkch3a.spl~ ~override~ //chaos shield
+COPY ~wl_houserules/components/new_kits/chancer/spl/wlmkch3b.spl~ ~override~ //imp chaos shield
+COPY ~wl_houserules/components/new_kits/chancer/spl/wlmkch4.spl~ ~override~ //nahal
+	SAY NAME1 @58
+	SAY UNIDENTIFIED_DESC @5
+COPY ~wl_houserules/components/new_kits/chancer/spl/wlmkch99.spl~ ~override~ //disable reg casting
+
+//Chaos song
+COPY ~wl_houserules/components/new_kits/chancer/spl/wlmkch5x.spl~ ~override~ //make change
+COPY ~wl_houserules/components/new_kits/chancer/spl/wlmkch5.spl~ ~override~ //pick good/bad
+
+COPY ~wl_houserules/components/new_kits/chancer/spl/wlmkch5a.spl~ ~override~ //good root
+COPY ~wl_houserules/components/new_kits/chancer/spl/wlmkch5b.spl~ ~override~ //good 1, enemy stun
+	LPF ADD_SPELL_EFFECT
+		INT_VAR opcode = 139 target = 2 timing = 1 parameter1 = RESOLVE_STR_REF (@5) savingthrow = 1
+	END
+COPY ~wl_houserules/components/new_kits/chancer/spl/wlmkch5c.spl~ ~override~ //good 2, enemy dmg
+COPY ~wl_houserules/components/new_kits/chancer/spl/wlmkch5d.spl~ ~override~ //good 3, party buff
+	LPF ADD_SPELL_EFFECT
+		INT_VAR opcode = 139 target = 2 timing = 1 parameter1 = RESOLVE_STR_REF (@3)
+	END
+COPY ~wl_houserules/components/new_kits/chancer/spl/wlmkch5e.spl~ ~override~ //good 4, enemy debuff
+	LPF ADD_SPELL_EFFECT
+		INT_VAR opcode = 139 target = 2 timing = 1 parameter1 = RESOLVE_STR_REF (@4) savingthrow = 1
+	END
+COPY ~wl_houserules/components/new_kits/chancer/spl/wlmkch5f.spl~ ~override~ //good 5, enemy berserk
+	LPF ADD_SPELL_EFFECT
+		INT_VAR opcode = 139 target = 2 timing = 1 parameter1 = RESOLVE_STR_REF (@56) savingthrow = 1
+	END
+COPY ~wl_houserules/components/new_kits/chancer/spl/wlmkch5g.spl~ ~override~ //bad root
+COPY ~wl_houserules/components/new_kits/chancer/spl/wlmkch5h.spl~ ~override~ //bad 1, party stun
+	LPF ADD_SPELL_EFFECT
+		INT_VAR opcode = 139 target = 2 timing = 1 parameter1 = RESOLVE_STR_REF (@5) savingthrow = 1
+	END
+COPY ~wl_houserules/components/new_kits/chancer/spl/wlmkch5i.spl~ ~override~ //bad 2, party dmg
+COPY ~wl_houserules/components/new_kits/chancer/spl/wlmkch5j.spl~ ~override~ //bad 3, enemy buff
+	LPF ADD_SPELL_EFFECT
+		INT_VAR opcode = 139 target = 2 timing = 1 parameter1 = RESOLVE_STR_REF (@3)
+	END
+COPY ~wl_houserules/components/new_kits/chancer/spl/wlmkch5k.spl~ ~override~ //bad 4, party debuff
+	LPF ADD_SPELL_EFFECT
+		INT_VAR opcode = 139 target = 2 timing = 1 parameter1 = RESOLVE_STR_REF (@4) savingthrow = 1
+	END
+COPY ~wl_houserules/components/new_kits/chancer/spl/wlmkch5l.spl~ ~override~ //bad 5, party berserk
+	LPF ADD_SPELL_EFFECT
+		INT_VAR opcode = 139 target = 2 timing = 1 parameter1 = RESOLVE_STR_REF (@56) savingthrow = 1
+	END
+
+END

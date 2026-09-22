@@ -1,0 +1,5 @@
+WITH_TRA ~wl_houserules/lang/%LANGUAGE%/wl_paladin_tweaks.tra~ BEGIN
+ 
+INCLUDE "wl_houserules/components/class_tweaks/general_tweaks/wl_no_dc_stats.tph"
+
+END

@@ -1,0 +1,582 @@
+BACKUP "wl_houserules/backup"
+AUTHOR "https://next.nexusmods.com/profile/AlbiesEmporium"
+VERSION "1.2"
+README ~wl_houserules/lang/%LANGUAGE%/readmeh.txt~
+LANGUAGE ~English~ ~english~ ~wl_houserules/lang/english/wl_house_rules.tra~
+
+//last updated 08.12.2025
+
+/*
+BEGIN  ~test~
+DESIGNATED 0
+
+//INCLUDE "wl_houserules/components/item_tweaks/wL_revised_longbows.tph"
+//INCLUDE "wl_houserules/components/item_tweaks/wL_revised_crossbows.tph"
+//INCLUDE "wl_houserules/components/new_kits/wL_arcane_archer.tph"
+//INCLUDE "wl_houserules/components/item_tweaks/wL_finesse_weapons.tph"
+*/
+
+
+BEGIN ~Install all~
+
+DESIGNATED 1
+
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+
+FORBID_COMPONENT "wl_HouseRules.tp2" "13001" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "17001" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "18001" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "30001" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "30002" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "32001" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "32002" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "32301" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "33002" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "33003" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "33004" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "35001" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "35002" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "37001" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "37002" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "37101" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "37201" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "37301" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "40001" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "40002" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "40003" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "40004" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "40101" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "50001" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "50002" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "50003" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "50004" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "50005" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "50006" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "50007" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "50008" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "50009" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "50010" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "60000" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "60001" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "60002" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "60003" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "60004" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "70001" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "70002" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "70003" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "70004" "not needed"
+
+INCLUDE "wl_houserules/components/new_kits/wl_grey_guard.tph"
+INCLUDE "wl_houserules/components/new_kits/wl_chancer.tph"
+INCLUDE "wl_houserules/components/new_kits/wl_knife_master.tph"
+INCLUDE "wl_houserules/components/class_tweaks/general_tweaks/wl_general_all_tweaks.tph"
+INCLUDE "wl_houserules/components/class_tweaks/ranger_tweaks/wl_ranger_all_tweaks.tph"
+INCLUDE "wl_houserules/components/class_tweaks/paladin_tweaks/wl_paladin_all_tweaks.tph"
+INCLUDE "wl_houserules/components/class_tweaks/druid_tweaks/wl_druid_all_tweaks.tph"
+INCLUDE "wl_houserules/components/class_tweaks/thief_tweaks/wl_thief_all_tweaks.tph"
+INCLUDE "wl_houserules/components/class_tweaks/monk_tweaks/wl_monk_all_tweaks.tph"
+INCLUDE "wl_houserules/components/item_tweaks/wl_all_item_tweaks.tph"
+INCLUDE "wl_houserules/components/spell_tweaks/wl_all_spell_tweaks.tph"
+
+
+
+// Grey Guard Paladin Kit
+BEGIN @13001
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 13001
+GROUP @10000
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+INCLUDE "wl_houserules/components/new_kits/wl_grey_guard.tph"
+
+// Chancer Bard Kit
+BEGIN @17001
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 17001
+GROUP @10000
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+INCLUDE "wl_houserules/components/new_kits/wl_knife_master.tph"
+
+
+// Chancer Bard Kit
+BEGIN @18001
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 18001
+GROUP @10000
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+INCLUDE "wl_houserules/components/new_kits/wl_chancer.tph"
+
+/*
+BEGIN ~Divine Soul~
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 21001
+GROUP @10000
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+INCLUDE "wl_houserules/components/new_kits/wl_divine_soul.tph"
+*/
+
+// All General Class Tweaks
+BEGIN @30001
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 30001
+GROUP @30000
+FORBID_COMPONENT "wl_HouseRules.tp2" "30002" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+INCLUDE "wl_houserules/components/class_tweaks/general_tweaks/wl_general_all_tweaks.tph"
+
+// No Dual-Class Stats
+BEGIN @30002
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 30002
+GROUP @30000
+FORBID_COMPONENT "wl_HouseRules.tp2" "30001" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+INCLUDE "wl_houserules/components/class_tweaks/general_tweaks/wl_no_dc_stats.tph"
+
+
+// All Ranger Tweaks
+BEGIN @32001
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 32001
+GROUP @30000
+FORBID_COMPONENT "wl_HouseRules.tp2" "32002" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "32301" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+INCLUDE "wl_houserules/components/class_tweaks/ranger_tweaks/wl_ranger_all_tweaks.tph"
+
+// Evil/Fall
+BEGIN @32002
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 32002
+GROUP @30000
+FORBID_COMPONENT "wl_HouseRules.tp2" "32001" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+INCLUDE "wl_houserules/components/class_tweaks/ranger_tweaks/wl_ranger_evilfall.tph"
+
+// Beastmaster Tweaks
+BEGIN @32301
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 32301
+GROUP @30000
+FORBID_COMPONENT "wl_HouseRules.tp2" "32001" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+INCLUDE "wl_houserules/components/class_tweaks/ranger_tweaks/wl_ranger_beastmaster_tweaks.tph"
+
+// All Paladin Tweaks
+BEGIN @33001
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 33001
+GROUP @30000
+FORBID_COMPONENT "wl_HouseRules.tp2" "33002" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "33003" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "33004" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+INCLUDE "wl_houserules/components/class_tweaks/paladin_tweaks/wl_paladin_all_tweaks.tph"
+
+// Paladin Smite
+BEGIN @33002
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 33002
+GROUP @30000
+FORBID_COMPONENT "wl_HouseRules.tp2" "33001" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+INCLUDE "wl_houserules/components/class_tweaks/paladin_tweaks/wl_paladin_smite.tph"
+
+// NPC smite
+BEGIN @33003
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 33003
+GROUP @30000
+FORBID_COMPONENT "wl_HouseRules.tp2" "33001" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+REQUIRE_COMPONENT "wl_HouseRules.tp2" "33002" "requires Paladin Smite"
+INCLUDE "wl_houserules/components/class_tweaks/paladin_tweaks/wl_paladin_npc_smite.tph"
+
+// Fallen Tweaks
+BEGIN @33004
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 33004
+GROUP @30000
+FORBID_COMPONENT "wl_HouseRules.tp2" "33001" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+INCLUDE "wl_houserules/components/class_tweaks/paladin_tweaks/wl_paladin_fallen_tweaks.tph"
+
+// All Druid Tweaks
+BEGIN @35001
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 35001
+GROUP @30000
+FORBID_COMPONENT "wl_HouseRules.tp2" "35002" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+INCLUDE "wl_houserules/components/class_tweaks/druid_tweaks/wl_druid_all_tweaks.tph"
+
+// Shapeshifter Tweaks
+BEGIN @35002
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 35002
+GROUP @30000
+FORBID_COMPONENT "wl_HouseRules.tp2" "35001" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+INCLUDE "wl_houserules/components/class_tweaks/druid_tweaks/wl_shapeshifter_tweaks.tph"
+
+// All Thief Tweaks
+BEGIN @37001
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 37001
+GROUP @30000
+FORBID_COMPONENT "wl_HouseRules.tp2" "37002" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "37101" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "37201" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "37301" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+INCLUDE "wl_houserules/components/class_tweaks/thief_tweaks/wl_thief_all_tweaks.tph"
+
+// Sneak Attack
+BEGIN @37002
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 37002
+GROUP @30000
+FORBID_COMPONENT "wl_HouseRules.tp2" "37001" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+INCLUDE "wl_houserules/components/class_tweaks/thief_tweaks/wl_thief_sneak_attack.tph"
+
+// Assassin Tweaks
+BEGIN @37101
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 37101
+GROUP @30000
+FORBID_COMPONENT "wl_HouseRules.tp2" "37001" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+INCLUDE "wl_houserules/components/class_tweaks/thief_tweaks/wl_thief_sin_tweaks.tph"
+
+// BH Tweaks
+BEGIN @37201
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 37201
+GROUP @30000
+FORBID_COMPONENT "wl_HouseRules.tp2" "37001" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+INCLUDE "wl_houserules/components/class_tweaks/thief_tweaks/wl_thief_bh_tweaks.tph"
+
+// SB Tweaks
+BEGIN @37301
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 37301
+GROUP @30000
+FORBID_COMPONENT "wl_HouseRules.tp2" "37001" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+INCLUDE "wl_houserules/components/class_tweaks/thief_tweaks/wl_thief_sb_tweaks.tph"
+
+// All Monk Tweaks
+BEGIN @40001
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 40001
+GROUP @30000
+FORBID_COMPONENT "wl_HouseRules.tp2" "40002" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "40003" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "40004" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "40101" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+INCLUDE "wl_houserules/components/class_tweaks/monk_tweaks/wl_monk_all_tweaks.tph"
+
+// Detect Illusion
+BEGIN @40002
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 40002
+GROUP @30000
+FORBID_COMPONENT "wl_HouseRules.tp2" "40001" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+INCLUDE "wl_houserules/components/class_tweaks/monk_tweaks/wl_monk_di_for_all.tph"
+
+// Slow/Haste immunity
+BEGIN @40003
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 40003
+GROUP @30000
+FORBID_COMPONENT "wl_HouseRules.tp2" "40001" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+INCLUDE "wl_houserules/components/class_tweaks/monk_tweaks/wl_monk_no_slowhaste_immunity.tph"
+
+// Revised Fist
+BEGIN @40004
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 40004
+GROUP @30000
+FORBID_COMPONENT "wl_HouseRules.tp2" "40001" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+INCLUDE "wl_houserules/components/class_tweaks/monk_tweaks/wl_monk_revised_fist.tph"
+
+// Dark Moon Backstab
+BEGIN @40101
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 40101
+GROUP @30000
+FORBID_COMPONENT "wl_HouseRules.tp2" "40001" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+INCLUDE "wl_houserules/components/class_tweaks/monk_tweaks/wl_monk_darkmoon_backstab.tph"
+
+// All Item Tweaks
+BEGIN @50001
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 50001
+GROUP @50000
+FORBID_COMPONENT "wl_HouseRules.tp2" "50002" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "50003" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "50004" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "50005" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "50006" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "50007" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "50008" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "50009" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "50010" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+INCLUDE "wl_houserules/components/item_tweaks/wl_all_item_tweaks.tph"
+
+// One-handed Spears
+BEGIN @50002
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 50002
+GROUP @50000
+FORBID_COMPONENT "wl_HouseRules.tp2" "50001" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+INCLUDE "wl_houserules/components/item_tweaks/wl_1h_spears.tph"
+
+// Recharge Items
+BEGIN @50003
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 50003
+GROUP @50000
+FORBID_COMPONENT "wl_HouseRules.tp2" "50001" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+INCLUDE "wl_houserules/components/item_tweaks/wl_recharge_items.tph"
+
+// No Missile DMG Type
+BEGIN @50004
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 50004
+GROUP @50000
+FORBID_COMPONENT "wl_HouseRules.tp2" "50001" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+INCLUDE "wl_houserules/components/item_tweaks/wl_no_missile_dmg.tph"
+
+// Charged Staves
+BEGIN @50005
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 50005
+GROUP @50000
+FORBID_COMPONENT "wl_HouseRules.tp2" "50001" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+INCLUDE "wl_houserules/components/item_tweaks/wl_charged_staves.tph"
+
+// Revised Con Belt
+BEGIN @50006
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 50006
+GROUP @50000
+FORBID_COMPONENT "wl_HouseRules.tp2" "50001" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+INCLUDE "wl_houserules/components/item_tweaks/wl_revised_con_belt.tph"
+
+// Armored Thieving and Spellcasting
+BEGIN @50007
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 50007
+GROUP @50000
+FORBID_COMPONENT "wl_HouseRules.tp2" "50001" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+INCLUDE "wl_houserules/components/item_tweaks/wl_armored_thieving_and_spellcasting.tph"
+
+// Speed Daggers
+BEGIN @50008
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 50008
+GROUP @50000
+FORBID_COMPONENT "wl_HouseRules.tp2" "50001" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+INCLUDE "wl_houserules/components/item_tweaks/wl_speed_daggers.tph"
+
+// Revised Longbows
+BEGIN @50009
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 50009
+GROUP @50000
+FORBID_COMPONENT "wl_HouseRules.tp2" "50001" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+INCLUDE "wl_houserules/components/item_tweaks/wl_revised_longbows.tph"
+
+// Revised Crossbows
+BEGIN @50010
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 50010
+GROUP @50000
+FORBID_COMPONENT "wl_HouseRules.tp2" "50001" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+INCLUDE "wl_houserules/components/item_tweaks/wL_revised_crossbows.tph"
+
+// Spell Tweaks
+
+// All Spell Tweaks
+BEGIN @60001
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 60001
+GROUP @60000
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "60002" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "60003" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "60004" "not needed"
+INCLUDE "wl_houserules/components/spell_tweaks/wl_all_spell_tweaks.tph"
+
+// Improved Free Action
+BEGIN @60002
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 60002
+GROUP @60000
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "60001" "not needed"
+INCLUDE "wl_houserules/components/spell_tweaks/wl_improved_free_action.tph"
+
+// Replace Identify
+BEGIN @60003
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 60003
+GROUP @60000
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "60001" "not needed"
+INCLUDE "wl_houserules/components/spell_tweaks/wl_replace_identify.tph"
+
+// Revised Familiars
+BEGIN @60004
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 60004
+GROUP @60000
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "60001" "not needed"
+INCLUDE "wl_houserules/components/spell_tweaks/wl_revised_familiars.tph"
+
+// General Tweaks
+
+// All General Tweaks
+BEGIN @70001
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 70001
+GROUP @70000
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "70002" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "70003" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "70004" "not needed"
+INCLUDE "wl_houserules/components/general_tweaks/wl_all_general_tweaks.tph"
+
+// Steal From All Shops
+BEGIN @70002
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 70002
+GROUP @70000
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "70001" "not needed"
+INCLUDE "wl_houserules/components/general_tweaks/wl_steal_from_all.tph"
+
+// Lore Tweaks
+BEGIN @70003
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 70003
+GROUP @70000
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "70001" "not needed"
+INCLUDE "wl_houserules/components/general_tweaks/wl_lore_tweaks.tph"
+
+// Minions trigger traps
+BEGIN @70004
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ ~Game not supported. For EET support, contact Xgatt at https://github.com/Xgatt/WL-House-Rules-EET/issues~
+REQUIRE_PREDICATE !FILE_EXISTS ~dlc/sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+REQUIRE_PREDICATE !FILE_EXISTS ~sod-dlc.zip~ ~This mod requires dlc merger to be installed first.~
+DESIGNATED 70004
+GROUP @70000
+FORBID_COMPONENT "wl_HouseRules.tp2" "1" "not needed"
+FORBID_COMPONENT "wl_HouseRules.tp2" "70001" "not needed"
+INCLUDE "wl_houserules/components/general_tweaks/wl_minions_trigger_traps.tph"
+

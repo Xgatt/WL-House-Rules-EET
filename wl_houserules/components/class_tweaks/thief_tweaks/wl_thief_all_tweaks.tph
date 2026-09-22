@@ -1,0 +1,11 @@
+WITH_TRA ~wl_HouseRules/lang/%LANGUAGE%/wl_thief_tweaks.tra~ BEGIN
+
+INCLUDE "wl_houserules/components/class_tweaks/thief_tweaks/wl_thief_sneak_attack.tph"
+
+INCLUDE "wl_houserules/components/class_tweaks/thief_tweaks/wl_thief_sin_tweaks.tph"
+
+INCLUDE "wl_houserules/components/class_tweaks/thief_tweaks/wl_thief_bh_tweaks.tph"
+
+INCLUDE "wl_houserules/components/class_tweaks/thief_tweaks/wl_thief_sb_tweaks.tph"
+
+END

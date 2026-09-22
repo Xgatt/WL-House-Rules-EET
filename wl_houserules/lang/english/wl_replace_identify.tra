@@ -1,0 +1,29 @@
+@1 = ~Arcane Lore~
+
+@2 = ~Arcane Lore
+(Divination)
+
+Level: 1
+Range: 0
+Duration: 8 hours
+Casting Time: Instant
+Area of Effect: Caster
+Saving Throw: None
+
+This spell augments the caster's lower by 20 for 8 hours. The bonus increases by 20 at level 5 and every fifth level thereafter.~
+
+@3 = ~Divine Lore~
+
+@4 = ~Divine Lore
+(Divination)
+
+Level: 1
+Range: 0
+Duration: 8 hours
+Casting Time: Instant
+Area of Effect: Caster
+Saving Throw: None
+
+This spell augments the caster's lower by 20 for 8 hours. The bonus increases by 20 at level 5 and every fifth level thereafter.~
+
+@5 = ~Lore Augmented~

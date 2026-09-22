@@ -1,0 +1,59 @@
+WITH_TRA ~wl_houserules/lang/%LANGUAGE%/wl_arcane_archer.tra~ BEGIN
+
+INCLUDE ~wl_houserules/lib/a7#add_kit_ex.tpa~
+
+COPY_EXISTING_REGEXP GLOB ~^.+\.itm~ ~override~ 
+	PATCH_IF (%SOURCE_SIZE% > 0x70) BEGIN
+		READ_SHORT 0x1c cat
+			PATCH_IF 
+			(cat = 15) BEGIN
+				LPF ADD_ITEM_EQEFFECT
+					INT_VAR
+						opcode = 206
+						target = 1
+						timing = 2
+						resist_dispel = 0
+						parameter2 = "-1"
+					STR_VAR
+						resource = wlmkaa02
+				END	
+			END
+	END
+BUT_ONLY
+
+
+COPY ~wl_houserules/components/new_kits/arcane_archer/spl/wlmkaa00.spl~ ~override~
+COPY ~wl_houserules/components/new_kits/arcane_archer/spl/wlmkaa01.spl~ ~override~
+WRITE_LONG 0x08 RESOLVE_STR_REF (@4)
+COPY ~wl_houserules/components/new_kits/arcane_archer/spl/wlmkaa02.spl~ ~override~
+LPF ALTER_EFFECT
+	INT_VAR
+		match_opcode = 139
+		parameter1 = RESOLVE_STR_REF (@12)
+END
+COPY ~wl_houserules/components/new_kits/arcane_archer/spl/wlmkaa03.spl~ ~override~
+
+COPY ~wl_houserules/components/new_kits/arcane_archer/eff~ ~override~
+
+COPY_EXISTING ~clabth01.2da~ ~override/wlmkaacl.2da~
+APPEND ~wlmkaacl.2DA~ ~WLAAABIL1   GA_WLMKAA00	****	****	****	GA_WLMKAA00	****	****	****	****	GA_WLMKAA00	****	****	****	****	GA_WLMKAA00	****	****	****	****	GA_WLMKAA00	****	****	****	****	GA_WLMKAA00	****	****	****	****	GA_WLMKAA00	****	****	****	****	GA_WLMKAA00	****	****	****	****	GA_WLMKAA00~
+APPEND ~wlmkaacl.2DA~ ~WLAAABIL2   ****	****	****	****	GA_WLMKAA01	****	****	****	****	GA_WLMKAA01	****	****	****	****	GA_WLMKAA01	****	****	****	****	GA_WLMKAA01	****	****	****	****	GA_WLMKAA01	****	****	****	****	GA_WLMKAA01	****	****	****	****	GA_WLMKAA01	****	****	****	****	GA_WLMKAA01~
+APPEND ~wlmkaacl.2DA~ ~WLAAABIL3   ****	****	****	****	****	****	****	****	****	GA_WLMKAA04	****	****	****	****	GA_WLMKAA04	****	****	****	****	GA_WLMKAA04	****	****	****	****	GA_WLMKAA04	****	****	****	****	GA_WLMKAA04	****	****	****	****	GA_WLMKAA04	****	****	****	****	GA_WLMKAA04~
+APPEND ~wlmkaacl.2DA~ ~WLAAABIL4   ****	****	****	****	****	****	****	****	****	****	****	****	****	****	GA_WLMKAA07	****	****	****	****	GA_WLMKAA07	****	****	****	****	GA_WLMKAA07	****	****	****	****	GA_WLMKAA07	****	****	****	****	GA_WLMKAA07	****	****	****	****	GA_WLMKAA07~
+APPEND ~wlmkaacl.2DA~ ~WLAAABIL5   ****	****	****	****	****	****	****	****	****	****	****	****	****	****	****	****	****	****	****	GA_WLMKAA10	****	****	****	****	GA_WLMKAA10	****	****	****	****	GA_WLMKAA10	****	****	****	****	GA_WLMKAA10	****	****	****	****	GA_WLMKAA10~
+
+LAF ADD_KIT_EX
+	INT_VAR
+		kit_class		= 2
+		mixed 			= RESOLVE_STR_REF (@1)
+		help			= RESOLVE_STR_REF (@2)
+		
+	STR_VAR
+		kit_name		= ~wlmkaa~
+		clab_path		= ~wlmkaacl.2da~
+		weapprof		= ~1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 5 5 5 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+	RET
+		kit_id
+END
+
+END

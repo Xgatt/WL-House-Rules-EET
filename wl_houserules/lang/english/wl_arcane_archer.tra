@@ -1,0 +1,34 @@
+@1 = ~Arcane Archer~
+
+@2 = ~ARCANE ARCHER: Warriors skilled in weaving magic into their archery, granting them a variety of effects and almost supernatural accuracy.
+
+Advantages:
+– +1 to hit and damage with missile weapons at level 1 with further increases at levels 5, 10, 15, 20, 25, 30, 35 and 40.
+– May achieve grandmastery with bows.
+– May Enchant Arrows at level 1, granting them +1 enchantment level and an additional 1d4 magic damage. The ability improves at levels 5, 10 and 15, increasing the enchantment level by 1 and the die size by 2 up to +4 and 1d10. Gains additional uses levels 5, 10, 15, 20, 25, 30, 35 and 40.
+– May Conjure Explosive Arrow at level 5, which explodes on impact dealing 6d6 fire damage (save vs spell for half) in an area around the target. Must be wielding a bow, else nothing will happend and the ability will be wasted. The arrow needs to be fired within 1 round or its energy will dissipate and the ability will be wasted. Gains additional uses at levels 10, 15, 20, 25, 30, 35 and 40.
+– May Conjure Dispelling Arrow at level 10, which removes magical enchantments affecting its target. Must be wielding a bow, else nothing will happend and the ability will be wasted. The arrow needs to be fired within 1 round or its energy will dissipate and the ability will be wasted. Gains additional uses at levels 15, 20, 25, 30, 35 and 40.
+– May Conjure Banishing Arrow at level 15, which traps the target in an extra–dimensional space as if affected by the spell Maze. Must be wielding a bow, else nothing will happend and the ability will be wasted. The arrow needs to be fired within 1 round or its energy will dissipate and the ability will be wasted. Gains additional uses at levels 20, 25, 30, 35 and 40.
+– May Conjure Arrow of Death at level 20, which slays the target if it fails a save vs death. Must be wielding a bow, else nothing will happend and the ability will be wasted. The arrow needs to be fired within 1 round or its energy will dissipate and the ability will be wasted. Gains additional uses at levels 30 and 40.
+Disadvantages:
+– May not exceed proficiency with any weapons of fighting styles except for bows.~
+
+@3 = ~Enchant Arrows~
+
+@4 = ~Conjure Explosive Arrow~
+
+@5 = ~Conjure Dispelling Arrow~
+
+@6 = ~Conjure Banishing Arrow~
+
+@7 = ~Conjure Arrow of Death~
+
+@8 = ~Conjures an a single arrow, which explodes on impact dealing 6d6 fire damage (save vs spell for half) in an area around the target. Must be wielding a bow, else nothing will happend and the ability will be wasted. The arrow needs to be fired within 1 round or its energy will dissipate and the ability will be wasted.~
+
+@9 = ~Conjures an a single arrow, which removes magical enchantments affecting its target. Must be wielding a bow, else nothing will happend and the ability will be wasted. The arrow needs to be fired within 1 round or its energy will dissipate and the ability will be wasted.~
+
+@10 = ~Conjures an a single arrow, which traps the target in an extra–dimensional space as if affected by the spell Maze. Must be wielding a bow, else nothing will happend and the ability will be wasted. The arrow needs to be fired within 1 round or its energy will dissipate and the ability will be wasted.~
+
+@11 = ~Conjures an a single arrow, which slays the target if it fails a save vs death. Must be wielding a bow, else nothing will happend and the ability will be wasted. The arrow needs to be fired within 1 round or its energy will dissipate and the ability will be wasted.~
+
+@12 = ~Must wield a bow to conjure arrows.~

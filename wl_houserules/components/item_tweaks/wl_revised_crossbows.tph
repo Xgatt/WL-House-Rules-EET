@@ -1,0 +1,171 @@
+WITH_TRA ~wl_houserules/lang/%LANGUAGE%/wl_item_tweaks.tra~ BEGIN 
+
+COPY_EXISTING_REGEXP GLOB ~^.+\.itm~ ~override~ 
+PATCH_IF (%SOURCE_SIZE% > 0x70) BEGIN
+	READ_SHORT 0x1c cat
+	READ_SHORT 0x26 minstr
+	READ_LONG 0x64 aboff
+	READ_SHORT 0x68 abnum
+	SPRINT dmg1 @22
+	SPRINT thac01 @23
+	SPRINT thac02 @24
+	SPRINT stat1 @20
+	SPRINT stat2 @25
+		//make bolts usable by everyone
+		PATCH_IF 
+			(cat = 31) BEGIN
+				WRITE_LONG 0x1e (0b00000000000000000000000000000000)
+		END
+		//make changes to crossbows
+		PATCH_IF 
+			(cat = 27) BEGIN
+				//make crossbows usable by everyone
+				WRITE_LONG 0x1e (0b00000000000000000000000000000000)
+
+				FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+					READ_LONG "%index%" "valid"
+					PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+						READ_STRREF "%index%" "description"
+							PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~%thac01%~) = 0 BEGIN // add thac0 bonus
+								INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+									REPLACE_EVALUATE ~%thac01% \+\([0-9]\)~
+									BEGIN
+										SET result = MATCH1 + 4
+									END
+									~%thac01% +%result%~
+								END
+							SAY_EVALUATED "%index%" ~%new_desc%~
+							END
+							ELSE BEGIN
+								INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+									REPLACE_TEXTUALLY ~%dmg1%~ ~%thac02%~
+								END
+							SAY_EVALUATED "%index%" ~%new_desc%~
+							END
+								
+					END
+				END
+				
+				PATCH_IF (minstr > 9) BEGIN //update heavy crossbow description
+					FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+						READ_LONG "%index%" "valid"
+						PATCH_IF ("%valid%" < 2147483646) AND ("%valid%" >= 0) BEGIN // verify description is valid
+							READ_STRREF "%index%" "description"
+								PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~%dmg1%~) = 0 BEGIN // add dmg bonus
+									INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+										REPLACE_EVALUATE ~%dmg1% \+\([0-9]\)~
+										BEGIN
+											SET result = MATCH1 + 8
+										END
+										~%dmg1% +%result%~
+										REPLACE_TEXTUALLY ~%stat1%~ ~%stat2%~
+									END
+								SAY_EVALUATED "%index%" ~%new_desc%~
+								END
+						END
+					END
+				END
+
+				PATCH_IF (minstr > 9) BEGIN
+				//change heavy crossbow apr
+					LPF ALTER_ITEM_EFFECT
+						INT_VAR
+							check_globals = 1
+							match_opcode = 1
+							parameter2 = 3
+					END
+				//add knockdown and knockback to heavy crossbow
+					LPF ADD_ITEM_EFFECT
+						INT_VAR
+							type = 4
+							opcode=235
+							parameter1 = 25
+							parameter2 = 2
+							duration = 2
+							timing = 10
+							target = 2
+							resist_dispel = 0
+							savingthrow = 4
+					END
+					LPF ADD_ITEM_EFFECT
+						INT_VAR
+							type = 4
+							opcode=39
+							parameter2 = 1
+							duration = 3
+							timing = 0
+							target = 2
+							resist_dispel = 0
+							savingthrow = 4
+					END
+					LPF ADD_ITEM_EFFECT
+						INT_VAR
+							type = 2
+							opcode=235
+							parameter1 = 25
+							parameter2 = 2
+							duration = 2
+							timing = 10
+							target = 2
+							resist_dispel = 0
+							savingthrow = 4
+					END
+					LPF ADD_ITEM_EFFECT
+						INT_VAR
+							type = 2
+							opcode=39
+							parameter2 = 1
+							duration = 3
+							timing = 0
+							target = 2
+							resist_dispel = 0
+							savingthrow = 4
+					END
+				END
+				
+				//boost dmg and thac0
+				WHILE (abnum > 0) BEGIN
+					READ_BYTE (aboff + (abnum - 1) * 0x38) abtyp
+					PATCH_IF (minstr > 9) AND ((abtyp = 4) OR (abtyp = 2)) BEGIN //dmg bonus
+						READ_BYTE (aboff + (abnum - 1) * 0x38 + 0x1a) dmgbon
+						WRITE_BYTE (aboff + (abnum - 1) * 0x38 + 0x1a) (%dmgbon%+8)
+					END
+					PATCH_IF ((abtyp = 4) OR (abtyp = 2)) BEGIN //thac0 bonus
+						READ_BYTE (aboff + (abnum - 1) * 0x38 + 0x14) thac0bon
+						WRITE_BYTE (aboff + (abnum - 1) * 0x38 + 0x14) (%thac0bon%+4)
+					END
+					SET abnum = (abnum - 1)
+				END
+				
+/*				//kept for bitwise shift example, see parameter2
+				LPF ADD_ITEM_EQEFFECT
+					INT_VAR
+						opcode = 233
+						target = 1
+						timing = 2
+						parameter1 = 2
+						parameter2 = (103 + (1 << 16)) 
+				END
+*/				
+			END
+	END
+BUT_ONLY
+
+//allow everyone to become proficient
+COPY_EXISTING ~weapprof.2da~ ~override~
+	COUNT_2DA_COLS cols
+	COUNT_2DA_ROWS %cols% rows
+	FOR (row = 0 ; row < rows ; row += 1) BEGIN
+		READ_2DA_ENTRY row 0 cols prof
+		PATCH_IF (~%prof%~ STRING_EQUAL_CASE ~CROSSBOW~) BEGIN
+			FOR (col = 4 ; col < cols ; col += 1) BEGIN
+				READ_2DA_ENTRY row col cols patch
+				PATCH_IF (patch = 0) BEGIN
+					SET_2DA_ENTRY %row% col cols 1
+				END
+			END 
+		END
+	END
+
+
+END

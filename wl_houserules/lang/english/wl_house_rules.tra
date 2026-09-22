@@ -1,0 +1,131 @@
+//last updated 08.12.2025
+
+@0 = ~Prerequisite component(s) not installed~
+
+@10000 = ~New Kits~
+
+@13001 = ~Grey Guard Paladin kit~
+
+@17001 = ~Knife Master Thief kit~
+
+@18001 = ~Chancer Bard kit~
+
+@30000 = ~Class Tweaks~
+
+@30001 = ~All General Class Tweaks~
+
+@30002 = ~No Dual Class Stat Restrictions~
+
+@31000 = ~Fighter Tweaks~
+
+@31001 = ~All Fighter Tweaks~
+
+@32000 = ~Ranger Tweaks~
+
+@32001 = ~All Ranger Tweaks~
+
+@32002 = ~Can Be Evil/Can't Fall~
+
+@32301 = ~Beastmaster Tweaks~
+
+@33000 = ~Paladin Tweaks~
+
+@33001 = ~All Paladin Tweaks~
+
+@33002 = ~Paladin Smite~
+
+@33003 = ~NPC Paladin Smite~
+
+@33004 = ~Fallen Paladin Tweaks~
+
+@34000 = ~Cleric Tweaks~
+
+@34001 = ~All Cleric Tweaks~
+
+@35000 = ~Druid Tweaks~
+
+@35001 = ~All Druid Tweaks~
+
+@35002 = ~Shapeshifter Tweaks~
+
+@36000 = ~Mage Tweaks~
+
+@36001 = ~All Mage Tweaks~
+
+@37000 = ~Thief Tweaks~
+
+@37001 = ~All Thief Tweaks~
+
+@37002 = ~Sneak Attack~
+
+@37101 = ~Assassin Tweaks~
+
+@37201 = ~Bounty Hunter Tweaks~
+
+@37301 = ~Swashbuckler Tweaks~
+
+@38000 = ~Bard Tweaks~
+
+@38001 = ~All Bard Tweaks~
+
+@39000 = ~Sorcerer Tweaks~
+
+@39001 = ~All Sorcerer Tweaks~
+
+@40000 = ~Monk Tweaks~
+
+@40001 = ~All Monk Tweaks~
+
+@40002 = ~Detect Illusion For All~
+
+@40003 = ~No Slow/Haste immunity~
+
+@40004 = ~Revised Fist Progression~
+
+@40101 = ~Dark Moon Can Backstab~
+
+@41000 = ~Shaman Tweaks~
+
+@41001 = ~All Shaman Tweaks~
+
+@50000 = ~Item Tweaks~
+
+@50001 = ~All Item Tweaks~
+
+@50002 = ~One-handed spears (no attack animations)~
+
+@50003 = ~Recharge items~
+
+@50004 = ~No Missile DMG Type~
+
+@50005 = ~Charged Staves~
+
+@50006 = ~Revised Con Belt~
+
+@50007 = ~Armored Thieving and Spellcasting.~
+
+@50008 = ~Speed Daggers~
+
+@50009 = ~Revised Longbows~
+
+@50010 = ~Revised Crossbows~
+
+@60000 = ~Spell Tweaks~
+
+@60001 = ~All Spell Tweaks~
+
+@60002 = ~Improved Free Action~
+
+@60003 = ~Replace Identify~
+
+@60004 = ~Revised Familiars~
+
+@70000 = ~General Tweaks~
+
+@70001 = ~All General Tweaks~
+
+@70002 = ~Steal From All~
+
+@70003 = ~Lore Tweaks~
+
+@70004 = ~Mininions Trigger Traps~

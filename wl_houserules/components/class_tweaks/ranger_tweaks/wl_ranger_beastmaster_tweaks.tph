@@ -1,0 +1,220 @@
+WITH_TRA ~wl_houserules/lang/%LANGUAGE%/wl_ranger_tweaks.tra~ BEGIN
+
+
+// Move summon animals to innate
+COPY_EXISTING ~SPRA304.spl~ ~override~
+	WRITE_SHORT 0x1c 4
+	LPF ALTER_SPELL_HEADER
+		INT_VAR location = 4
+	END
+COPY_EXISTING ~SPRA305.spl~ ~override~
+	WRITE_SHORT 0x1c 4
+	LPF ALTER_SPELL_HEADER
+		INT_VAR location = 4
+	END
+COPY_EXISTING ~SPRA306.spl~ ~override~
+	WRITE_SHORT 0x1c 4
+	LPF ALTER_SPELL_HEADER
+		INT_VAR location = 4
+	END
+
+// Change at what levels they're accessible
+COPY_EXISTING ~clabrn04.2da~ ~override~
+	REPLACE_TEXTUALLY ~GA_SPRA304~ ~****      ~
+	REPLACE_TEXTUALLY ~GA_SPRA305~ ~****      ~
+	REPLACE_TEXTUALLY ~GA_SPRA306~ ~****      ~
+	APPEND ~clabrn04.2da~ ~WL_HRBM01   GA_SPRA304  ****        GA_SPRA304  ****        GA_SPRA304  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****~
+	APPEND ~clabrn04.2da~ ~WL_HRBM02   ****        ****        ****        ****        GA_SPRA305  ****        GA_SPRA305  ****        GA_SPRA305  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****~
+	APPEND ~clabrn04.2da~ ~WL_HRBM03   ****        ****        ****        ****        ****        ****        ****        ****        GA_SPRA306  ****        ****        GA_SPRA306  ****        ****        GA_SPRA306  ****        ****        ****        ****        ****   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****~
+
+// Apply level-based buffs to animal summons
+COMPILE ~wl_HouseRules/components/class_tweaks/ranger_tweaks/beastmaster/baf/wlhrbm01.baf~
+COPY ~wl_HouseRules/components/class_tweaks/ranger_tweaks/beastmaster/spl~ ~override~
+COPY_EXISTING_REGEXP GLOB ~^.+\.cre~ ~override~
+	READ_BYTE 0x271 general
+	READ_BYTE 0x275 gender
+	READ_ASCII 0x248 override
+	READ_ASCII 0x280 sname
+	PATCH_IF (
+		(gender = 6) AND
+		(general = 2) AND
+		!(~%sname%~ STRING_EQUAL_CASE ~wizeye~)) BEGIN
+		PATCH_IF (
+			(FILE_CONTAINS_EVALUATED(~%override%.bcs~ ~wl_minions_follow~) OR
+			FILE_CONTAINS_EVALUATED(~%override%.bcs~ ~wl_enemy_rest_timer~) OR
+			FILE_CONTAINS_EVALUATED(~%override%.bcs~ ~wl_minions_clear~)) AND
+			!(FILE_CONTAINS_EVALUATED(~%override%.bcs~ ~wl_hrbmboost~))) THEN BEGIN
+				INNER_ACTION BEGIN
+					EXTEND_TOP ~%override%.bcs~ ~wl_HouseRules/components/class_tweaks/ranger_tweaks/beastmaster/baf/wlhrbm01.baf~
+				END
+			END
+				ELSE BEGIN 
+					PATCH_IF (
+					(NOT FILE_CONTAINS_EVALUATED(~%override%.bcs~ ~wl_hrbmboost~)) AND
+					(NOT FILE_CONTAINS_EVALUATED(~%class%.bcs~ ~wl_hrbmboost~)) AND
+					(NOT FILE_CONTAINS_EVALUATED(~%race%.bcs~ ~wl_hrbmboost~)) AND
+					(NOT FILE_CONTAINS_EVALUATED(~%general%.bcs~ ~wl_hrbmboost~)) AND
+					(NOT FILE_CONTAINS_EVALUATED(~%default%.bcs~ ~wl_hrbmboost~)) AND
+					((~%override%~ STRING_EQUAL_CASE ~None~) OR
+					(~%override%~ STRING_EQUAL_CASE ~~))) THEN BEGIN
+						WRITE_ASCII 0x248 "wlhrbm01" #8
+					END
+					ELSE BEGIN
+						PATCH_IF (
+							(NOT FILE_CONTAINS_EVALUATED(~%override%.bcs~ ~wl_hrbmboost~)) AND
+							(NOT FILE_CONTAINS_EVALUATED(~%class%.bcs~ ~wl_hrbmboost~)) AND
+							(NOT FILE_CONTAINS_EVALUATED(~%race%.bcs~ ~wl_hrbmboost~)) AND
+							(NOT FILE_CONTAINS_EVALUATED(~%general%.bcs~ ~wl_hrbmboost~)) AND
+							(NOT FILE_CONTAINS_EVALUATED(~%default%.bcs~ ~wl_hrbmboost~)) AND
+							(!(~%override%~ STRING_EQUAL_CASE ~None~) OR
+							!(~%override%~ STRING_EQUAL_CASE ~~)) AND
+							((~%class%~ STRING_EQUAL_CASE ~None~) OR
+							(~%class%~ STRING_EQUAL_CASE ~~))) THEN BEGIN
+								WRITE_ASCII 0x248 "wlhrbm01" #8
+								WRITE_ASCIIE 0x250 "%override%" #8
+							END
+						ELSE BEGIN
+							PATCH_IF (
+								(NOT FILE_CONTAINS_EVALUATED(~%override%.bcs~ ~wl_hrbmboost~)) AND
+								(NOT FILE_CONTAINS_EVALUATED(~%class%.bcs~ ~wl_hrbmboost~)) AND
+								(NOT FILE_CONTAINS_EVALUATED(~%race%.bcs~ ~wl_hrbmboost~)) AND
+								(NOT FILE_CONTAINS_EVALUATED(~%general%.bcs~ ~wl_hrbmboost~)) AND
+								(NOT FILE_CONTAINS_EVALUATED(~%default%.bcs~ ~wl_hrbmboost~)) AND
+								(!(~%override%~ STRING_EQUAL_CASE ~None~) OR
+								!(~%override%~ STRING_EQUAL_CASE ~~)) AND
+								(!(~%class%~ STRING_EQUAL_CASE ~None~) OR
+								!(~%class%~ STRING_EQUAL_CASE ~~)) AND
+								((~%race%~ STRING_EQUAL_CASE ~None~) OR
+								(~%race%~ STRING_EQUAL_CASE ~~))
+								) THEN BEGIN
+									WRITE_ASCII 0x248 "wlhrbm01" #8
+									WRITE_ASCIIE 0x250 "%override%" #8
+									WRITE_ASCIIE 0x258 "%class%" #8
+								END
+							ELSE BEGIN
+								PATCH_IF (
+									(NOT FILE_CONTAINS_EVALUATED(~%override%.bcs~ ~wl_hrbmboost~)) AND
+									(NOT FILE_CONTAINS_EVALUATED(~%class%.bcs~ ~wl_hrbmboost~)) AND
+									(NOT FILE_CONTAINS_EVALUATED(~%race%.bcs~ ~wl_hrbmboost~)) AND
+									(NOT FILE_CONTAINS_EVALUATED(~%general%.bcs~ ~wl_hrbmboost~)) AND
+									(NOT FILE_CONTAINS_EVALUATED(~%default%.bcs~ ~wl_hrbmboost~)) AND
+									(!(~%override%~ STRING_EQUAL_CASE ~None~) OR
+									!(~%override%~ STRING_EQUAL_CASE ~~)) AND
+									(!(~%class%~ STRING_EQUAL_CASE ~None~) OR
+									!(~%class%~ STRING_EQUAL_CASE ~~)) AND
+									(!(~%race%~ STRING_EQUAL_CASE ~None~) OR
+									!(~%race%~ STRING_EQUAL_CASE ~~)) AND
+									((~%general%~ STRING_EQUAL_CASE ~None~) OR
+									(~%general%~ STRING_EQUAL_CASE ~~))
+									) THEN BEGIN
+										WRITE_ASCII 0x248 "wlhrbm01" #8
+										WRITE_ASCIIE 0x250 "%override%" #8
+										WRITE_ASCIIE 0x258 "%class%" #8
+										WRITE_ASCIIE 0x260 "%race%" #8
+									END
+								ELSE BEGIN
+									PATCH_IF (
+										(NOT FILE_CONTAINS_EVALUATED(~%override%.bcs~ ~wl_hrbmboost~)) AND
+										(NOT FILE_CONTAINS_EVALUATED(~%class%.bcs~ ~wl_hrbmboost~)) AND
+										(NOT FILE_CONTAINS_EVALUATED(~%race%.bcs~ ~wl_hrbmboost~)) AND
+										(NOT FILE_CONTAINS_EVALUATED(~%general%.bcs~ ~wl_hrbmboost~)) AND
+										(NOT FILE_CONTAINS_EVALUATED(~%default%.bcs~ ~wl_hrbmboost~)) AND
+										(!(~%override%~ STRING_EQUAL_CASE ~None~) OR
+										!(~%override%~ STRING_EQUAL_CASE ~~)) AND
+										(!(~%class%~ STRING_EQUAL_CASE ~None~) OR
+										!(~%class%~ STRING_EQUAL_CASE ~~)) AND
+										(!(~%race%~ STRING_EQUAL_CASE ~None~) OR
+										!(~%race%~ STRING_EQUAL_CASE ~~)) AND
+										(!(~%general%~ STRING_EQUAL_CASE ~None~) OR
+										!(~%general%~ STRING_EQUAL_CASE ~~)) AND
+										((~%default%~ STRING_EQUAL_CASE ~None~) OR
+										(~%default%~ STRING_EQUAL_CASE ~~))
+										) THEN BEGIN
+											WRITE_ASCII 0x248 "wlhrbm01" #8
+											WRITE_ASCIIE 0x250 "%override%" #8
+											WRITE_ASCIIE 0x258 "%class%" #8
+											WRITE_ASCIIE 0x260 "%race%" #8
+											WRITE_ASCIIE 0x268 "%general%" #8
+										END
+									ELSE BEGIN
+										PATCH_IF (
+											(NOT FILE_CONTAINS_EVALUATED(~%override%.bcs~ ~wl_hrbmboost~)) AND
+											(NOT FILE_CONTAINS_EVALUATED(~%class%.bcs~ ~wl_hrbmboost~)) AND
+											(NOT FILE_CONTAINS_EVALUATED(~%race%.bcs~ ~wl_hrbmboost~)) AND
+											(NOT FILE_CONTAINS_EVALUATED(~%general%.bcs~ ~wl_hrbmboost~)) AND
+											(NOT FILE_CONTAINS_EVALUATED(~%default%.bcs~ ~wl_hrbmboost~)) AND
+											(!(~%override%~ STRING_EQUAL_CASE ~None~) OR
+											!(~%override%~ STRING_EQUAL_CASE ~~)) AND
+											(!(~%class%~ STRING_EQUAL_CASE ~None~) OR
+											!(~%class%~ STRING_EQUAL_CASE ~~)) AND
+											(!(~%race%~ STRING_EQUAL_CASE ~None~) OR
+											!(~%race%~ STRING_EQUAL_CASE ~~)) AND
+											(!(~%general%~ STRING_EQUAL_CASE ~None~) OR
+											!(~%general%~ STRING_EQUAL_CASE ~~)) AND
+											(!(~%default%~ STRING_EQUAL_CASE ~None~) OR
+											!(~%default%~ STRING_EQUAL_CASE ~~))
+											) THEN BEGIN
+												INNER_ACTION BEGIN
+													EXTEND_TOP ~%override%.bcs~ ~wl_HouseRules/components/class_tweaks/ranger_tweaks/beastmaster/baf/wlhrbm01.baf~
+												END
+											END
+									END
+								END
+							END
+						END
+					END
+				END
+		END
+BUT_ONLY
+
+// Updating description with changes
+COPY_EXISTING ~kitlist.2da~ ~override~
+	COUNT_2DA_ROWS 10 rows
+		FOR (row = 3 ; row < rows ; row = row + 1 ) BEGIN
+			READ_2DA_ENTRY row 1 10 name
+			READ_2DA_ENTRY row 4 10 string
+			PATCH_IF (~%name%~ STRING_EQUAL_CASE ~BEASTMASTER~) BEGIN
+				SPRINT find1 @2
+				SPRINT replace1 @5
+				SPRINT find2 @3
+				SPRINT replace2 @6
+				SPRINT find3 @4
+				SPRINT replace3 @7
+				SPRINT patch_string ~%string%~
+				GET_STRREF ~%string%~ desc
+				INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+					REPLACE_TEXTUALLY ~%find1%~ ~%replace1%~
+					REPLACE_TEXTUALLY ~%find2%~ ~%replace2%~
+					REPLACE_TEXTUALLY ~%find3%~ ~%replace3%~
+				END
+			END
+		END
+		REPLACE ~%patch_string%~ ~%new_desc%~
+BUT_ONLY
+
+COPY_EXISTING ~clastext.2da~ ~override~ //update kit description in clastext
+	COUNT_2DA_ROWS 9 rows
+	FOR (row = 0 ; row < rows ; row += 1) BEGIN
+		READ_2DA_ENTRY row 0 9 name3
+		READ_2DA_ENTRY row 4 9 string3
+		PATCH_IF (~%name3%~ STRING_EQUAL_CASE ~ASSASIN~) BEGIN
+			SPRINT find1 @2
+			SPRINT replace1 @5
+			SPRINT find2 @3
+			SPRINT replace2 @6
+			SPRINT find3 @4
+			SPRINT replace3 @7
+			SPRINT patch_string ~%string3%~
+			GET_STRREF ~%string3%~ desc
+			INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+				REPLACE_TEXTUALLY ~%find1%~ ~%replace1%~
+				REPLACE_TEXTUALLY ~%find2%~ ~%replace2%~
+				REPLACE_TEXTUALLY ~%find3%~ ~%replace3%~
+			END
+		END
+	END
+	REPLACE ~%patch_string%~ ~%new_desc%~
+BUT_ONLY
+
+
+END

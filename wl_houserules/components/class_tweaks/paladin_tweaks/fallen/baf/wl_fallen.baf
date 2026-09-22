@@ -1,0 +1,120 @@
+IF
+	FallenPaladin(Player1)
+	Alignment(Player1,LAWFUL_GOOD)
+	ReputationGT(Player1,19)
+	!GlobalTimerNotExpired("wl_fallen_redeem_timeout_p1","GLOBAL")
+THEN
+	RESPONSE #100
+		ActionOverride(Player1,StartDialog("wlhrpt01",Player1)
+END
+
+IF
+	FallenPaladin(Player2)
+	Alignment(Player2,LAWFUL_GOOD)
+	ReputationGT(Player2,19)
+	!GlobalTimerNotExpired("wl_fallen_redeem_timeout_p2","GLOBAL")
+THEN
+	RESPONSE #100
+		ActionOverride(Player2,StartDialog("wlhrpt02",Player2)
+END
+
+IF
+	FallenPaladin(Player3)
+	Alignment(Player3,LAWFUL_GOOD)
+	ReputationGT(Player3,19)
+	!GlobalTimerNotExpired("wl_fallen_redeem_timeout_p3","GLOBAL")
+THEN
+	RESPONSE #100
+		ActionOverride(Player3,StartDialog("wlhrpt03",Player3)
+END
+
+IF
+	FallenPaladin(Player4)
+	Alignment(Player4,LAWFUL_GOOD)
+	ReputationGT(Player4,19)
+	!GlobalTimerNotExpired("wl_fallen_redeem_timeout_p4","GLOBAL")
+THEN
+	RESPONSE #100
+		ActionOverride(Player4,StartDialog("wlhrpt04",Player4)
+END
+
+IF
+	FallenPaladin(Player5)
+	Alignment(Player5,LAWFUL_GOOD)
+	ReputationGT(Player5,19)
+	!GlobalTimerNotExpired("wl_fallen_redeem_timeout_p5","GLOBAL")
+THEN
+	RESPONSE #100
+		ActionOverride(Player5,StartDialog("wlhrpt05",Player5)
+END
+
+IF
+	FallenPaladin(Player6)
+	Alignment(Player6,LAWFUL_GOOD)
+	ReputationGT(Player6,19)
+	!GlobalTimerNotExpired("wl_fallen_redeem_timeout_p6","GLOBAL")
+THEN
+	RESPONSE #100
+		ActionOverride(Player6,StartDialog("wlhrpt06",Player6)
+END
+
+IF
+	FallenPaladin(Player1)
+	ReputationLT(Player1,20)
+	ReputationGT(Player1,9)
+	!GlobalTimerNotExpired("wl_fallen_renounce_timeout_p1","GLOBAL")
+THEN
+	RESPONSE #100
+		ActionOverride(Player1,StartDialog("wlhrpt07",Player1)
+END
+
+IF
+	FallenPaladin(Player2)
+	ReputationLT(Player2,20)
+	ReputationGT(Player2,9)
+	!GlobalTimerNotExpired("wl_fallen_renounce_timeout_p2","GLOBAL")
+THEN
+	RESPONSE #100
+		ActionOverride(Player2,StartDialog("wlhrpt08",Player2)
+END
+
+IF
+	FallenPaladin(Player3)
+	ReputationLT(Player3,20)
+	ReputationGT(Player3,9)
+	!GlobalTimerNotExpired("wl_fallen_renounce_timeout_p3","GLOBAL")
+THEN
+	RESPONSE #100
+		ActionOverride(Player3,StartDialog("wlhrpt09",Player3)
+END
+
+IF
+	FallenPaladin(Player4)
+	ReputationLT(Player4,20)
+	ReputationGT(Player4,9)
+	!GlobalTimerNotExpired("wl_fallen_renounce_timeout_p4","GLOBAL")
+THEN
+	RESPONSE #100
+		ActionOverride(Player4,StartDialog("wlhrpt10",Player4)
+END
+
+IF
+	FallenPaladin(Player5)
+	ReputationLT(Player5,20)
+	ReputationGT(Player5,9)
+	!GlobalTimerNotExpired("wl_fallen_renounce_timeout_p5","GLOBAL")
+THEN
+	RESPONSE #100
+		ActionOverride(Player5,StartDialog("wlhrpt11",Player5)
+END
+
+IF
+	FallenPaladin(Player6)
+	ReputationLT(Player6,20)
+	ReputationGT(Player6,9)
+	!GlobalTimerNotExpired("wl_fallen_renounce_timeout_p6","GLOBAL")
+THEN
+	RESPONSE #100
+		ActionOverride(Player6,StartDialog("wlhrpt12",Player6)
+END
+

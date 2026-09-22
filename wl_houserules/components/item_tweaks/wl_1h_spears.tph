@@ -1,0 +1,32 @@
+WITH_TRA ~wl_houserules/lang/%LANGUAGE%/wl_item_tweaks.tra~ BEGIN
+
+COPY_EXISTING_REGEXP GLOB ~^.+\.itm~ ~override~
+	PATCH_IF (%SOURCE_SIZE% > 0x70) BEGIN
+		READ_SHORT 0x1c type
+		READ_LONG 0x18 flags
+			PATCH_IF
+				((flags BAND 0b00000000000000000000000000000010) != 0b00000000000000000000000000000000) AND
+				(type = 29) BEGIN
+					WRITE_LONG 0x18 (flags BAND 0b11111111111111111111111111111101)
+					FOR (index = 0x54 ; index >= 0x50 ; index -= 4) BEGIN // loop through descriptions
+						READ_LONG ~%index%~ ~valid~
+						PATCH_IF (~%valid%~ < 2147483646) AND (~%valid%~ >= 0) BEGIN // verify description is valid
+							SPRINT find @6
+							SPRINT replace @7
+							READ_STRREF ~%index%~ ~description~
+								PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~%find%~) = 0 BEGIN // more validation
+									INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+										REPLACE_TEXTUALLY ~%find%~ ~%replace%~
+									END
+								SAY_EVALUATED ~%index%~ ~%new_desc%~
+								END
+						END
+					END
+			END
+	END
+	BUT_ONLY
+	
+COPY_EXISTING ~itemtype.2da~ ~override~
+	SET_2DA_ENTRY 30 3 3 35
+	
+END

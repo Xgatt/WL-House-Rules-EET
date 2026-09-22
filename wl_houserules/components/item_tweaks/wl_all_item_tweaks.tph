@@ -1,0 +1,22 @@
+WITH_TRA ~wl_houserules/lang/%LANGUAGE%/wl_item_tweaks.tra~ BEGIN
+
+
+INCLUDE "wl_houserules/components/item_tweaks/wl_1h_spears.tph"
+
+INCLUDE "wl_houserules/components/item_tweaks/wl_recharge_items.tph"
+
+INCLUDE "wl_houserules/components/item_tweaks/wl_no_missile_dmg.tph"
+
+INCLUDE "wl_houserules/components/item_tweaks/wl_charged_staves.tph"
+
+INCLUDE "wl_houserules/components/item_tweaks/wl_revised_con_belt.tph"
+
+INCLUDE "wl_houserules/components/item_tweaks/wl_armored_thieving_and_spellcasting.tph"
+
+INCLUDE "wl_houserules/components/item_tweaks/wl_speed_daggers.tph"
+
+INCLUDE "wl_houserules/components/item_tweaks/wl_revised_longbows.tph"
+
+INCLUDE "wl_houserules/components/item_tweaks/wL_revised_crossbows.tph"
+
+END

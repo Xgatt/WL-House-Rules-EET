@@ -1,0 +1,10 @@
+//WITH_TRA ~wl_houserules/lang/%LANGUAGE%/wl_item_tweaks.tra~ BEGIN
+
+
+INCLUDE "wl_houserules/components/general_tweaks/wl_steal_from_all.tph"
+
+INCLUDE "wl_houserules/components/general_tweaks/wl_lore_tweaks.tph"
+
+INCLUDE "wl_houserules/components/general_tweaks/wl_minions_trigger_traps.tph"
+
+//END

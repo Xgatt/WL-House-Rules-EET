@@ -1,0 +1,44 @@
+WITH_TRA ~wl_houserules/lang/%LANGUAGE%/wl_item_tweaks.tra~ BEGIN 
+
+INCLUDE ~wl_houserules/lib/append_to_ids.tpa~
+
+LAF APPEND_TO_IDS
+	INT_VAR
+		min = 1
+		max = 999
+		fail = 1
+		warn = 1
+	STR_VAR 
+		file = ~splstate.ids~
+		name = ~WL_FINESSE~
+	RET
+		index 
+END
+
+COPY_EXISTING_REGEXP GLOB ~^.+\.itm~ ~override~ 
+SPRINT hook @20
+SPRINT add @21
+	PATCH_IF (%SOURCE_SIZE% > 0x70) BEGIN
+		READ_SHORT 0x1c cat
+		READ_ASCII 0x22 anim (2) NULL
+			PATCH_IF 
+			(cat = 19) AND
+			(~%anim%~ STRING_EQUAL ~SS~)BEGIN
+				LPF ALTER_ITEM_HEADER
+					INT_VAR
+						flag_strength = 0
+				END
+				LPF ADD_ITEM_EQEFFECT
+					INT_VAR
+						opcode = 328
+						special = 1
+						target = 2
+						timing = 2
+						resist_dispel = 0
+						parameter2 = %index%
+				END	
+			END
+	END
+BUT_ONLY
+
+END

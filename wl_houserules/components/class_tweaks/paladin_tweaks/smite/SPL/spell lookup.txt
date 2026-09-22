@@ -1,0 +1,4 @@
+00: smite evil base
+01-05: smite evil CHA scaling
+06: smite good base
+07-01: smite good CHA scaling

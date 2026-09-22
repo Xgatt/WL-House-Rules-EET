@@ -1,0 +1,29 @@
+WITH_TRA ~wl_HouseRules/lang/%LANGUAGE%/wl_thief_tweaks.tra~ BEGIN
+
+// break up the bounty hunter's special snare into separate abilities
+ACTION_IF (FILE_EXISTS_IN_GAME ~clabth03.2DA~) BEGIN 
+	COPY_EXISTING ~clabth03.2DA~ ~override~
+		REPLACE_TEXTUALLY ~GA_SPCL414~ ~GA_wlttbh01~
+	APPEND ~clabth03.2da~ ~WLBHABIL1   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        GA_wlttbh02 ****        ****        ****        ****        GA_wlttbh02   ****        ****        ****        ****    GA_wlttbh02   ****        ****        ****        ****        GA_wlttbh02   ****        ****        ****        ****        GA_wlttbh02   ****        ****        ****        ****        GA_wlttbh02   ****        ****        ****        ****~
+	APPEND ~clabth03.2da~ ~WLBHABIL2   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        GA_wlttbh03   ****        ****        ****        ****    GA_wlttbh03   ****        ****        ****        ****        GA_wlttbh03   ****        ****        ****        ****        GA_wlttbh03   ****        ****        ****        ****        GA_wlttbh03   ****        ****        ****        ****~
+	APPEND ~clabth03.2da~ ~WLBHABIL3   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****          ****        ****        ****        ****    GA_wlttbh04   ****        ****        ****        ****        GA_wlttbh04   ****        ****        ****        ****        GA_wlttbh04   ****        ****        ****        ****        GA_wlttbh04   ****        ****        ****        ****~
+COPY ~wl_houserules/components/class_tweaks/thief_tweaks/bounty_hunter/spl/wlttbh01.spl~ ~override~
+	SAY 0x08 @2001
+	SAY 0x50 @2011
+COPY ~wl_houserules/components/class_tweaks/thief_tweaks/bounty_hunter/spl/wlttbh02.spl~ ~override~
+	SAY 0x08 @2002
+	SAY 0x50 @2022
+COPY ~wl_houserules/components/class_tweaks/thief_tweaks/bounty_hunter/spl/wlttbh03.spl~ ~override~
+	SAY 0x08 @2003
+	SAY 0x50 @2033
+COPY ~wl_houserules/components/class_tweaks/thief_tweaks/bounty_hunter/spl/wlttbh04.spl~ ~override~
+	SAY 0x08 @2004
+	SAY 0x50 @2044
+COPY ~wl_houserules/components/class_tweaks/thief_tweaks/bounty_hunter/spl/wlttbh05.spl~ ~override~
+COPY ~wl_houserules/components/class_tweaks/thief_tweaks/bounty_hunter/spl/wlttbh06.spl~ ~override~
+COPY ~wl_houserules/components/class_tweaks/thief_tweaks/bounty_hunter/spl/wlttbh07.spl~ ~override~
+COPY ~wl_houserules/components/class_tweaks/thief_tweaks/bounty_hunter/spl/wlttbh08.spl~ ~override~
+END
+
+
+END

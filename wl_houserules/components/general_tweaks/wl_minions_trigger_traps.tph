@@ -1,0 +1,20 @@
+COPY_EXISTING_REGEXP ~^.+\.are~ ~override~
+	READ_SHORT 0x5a triggernumber
+	READ_LONG 0x5c triggeroffset
+	WHILE (triggernumber > 0) BEGIN
+		READ_LONG (triggeroffset + (triggernumber - 1) * 0xc4 + 0x60) triggerflags
+		READ_ASCII (triggeroffset + (triggernumber - 1) * 0xc4 + 0x7c) trapscript
+			PATCH_IF (triggerflags BAND BIT3) BEGIN
+				WRITE_LONG (triggeroffset + (triggernumber - 1) * 0xc4 + 0x60) (THIS BOR BIT6)
+				INNER_ACTION BEGIN
+					ACTION_IF FILE_EXISTS_IN_GAME ~%trapscript%.bcs~ THEN BEGIN
+						COPY_EXISTING ~%trapscript%.bcs~ ~override~
+						DECOMPILE_AND_PATCH BEGIN
+							REPLACE_TEXTUALLY ~ANYONE~ ~GOODCUTOFF~
+						END
+					END
+				END
+			END
+		SET triggernumber = (triggernumber - 1)
+	END
+BUT_ONLY
