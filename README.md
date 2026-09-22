@@ -1,6 +1,6 @@
 # WL House Rules (EET)
 
-This fork simply updates the main tp2 to add EET as a supported game for the mod. For any issues with EET, please reach out to Xgatt for support by [opening an issue](https://github.com/Xgatt/WL-House-Rules-EET/issues).
+This fork simply updates the main tp2 to add EET as a supported game for the mod. For any issues with this mod, especially getting it to work on EET, please reach out to Xgatt for support by [opening an issue](https://github.com/Xgatt/WL-House-Rules-EET/issues).
 
 All credit for WL House Rules goes to the original author, Albro / Kinto: [WL House Rules on Nexus Mods](https://www.nexusmods.com/baldursgate2ee/mods/110).
 
@@ -35,20 +35,3 @@ Some features may require starting a new game to work.
 2. Follow the installation instructions.
 
 Some features may require starting a new game to work.
-
-## FAQ
-
-**Q:** Is this compatible with X?  
-**A:** I don't know
-
-**Q:** Will you make this compatible with X?  
-**A:** No
-
-**Q:** Will you change X?  
-**A:** No
-
-**Q:** I found a bug, will you fix it?  
-**A:** Maybe, no guarantees
-
-**Q:** When will you fix it?  
-**A:** I don't know
