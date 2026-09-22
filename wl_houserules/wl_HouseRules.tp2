@@ -1,5 +1,5 @@
 BACKUP "wl_houserules/backup"
-AUTHOR "https://next.nexusmods.com/profile/AlbiesEmporium"
+AUTHOR "Xgatt - https://github.com/Xgatt/WL-House-Rules-EET/issues"
 VERSION "1.2"
 README ~wl_houserules/lang/%LANGUAGE%/readmeh.txt~
 LANGUAGE ~English~ ~english~ ~wl_houserules/lang/english/wl_house_rules.tra~
