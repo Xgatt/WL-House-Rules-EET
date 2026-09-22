@@ -5,6 +5,7 @@ This fork simply updates the main tp2 to add EET as a supported game for the mod
 All credit for WL House Rules goes to the original author, Albro / Kinto: [WL House Rules on Nexus Mods](https://www.nexusmods.com/baldursgate2ee/mods/110).
 
 ---
+# Original Description from the Nexus Page:
 
 This is my personal collection of tweaks, rule changes and kits. See the readme in the article section here for details on each component.
 
